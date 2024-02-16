@@ -1,9 +1,10 @@
 ---
-title: #>>Teori Resiko"    #>>Mendefinisikan judul dokumen 
+title: #>>Teori Resiko"    #>>Mendefinaisikan judul dokumen 
 subtitle: "~ Tugas Teori Resiko ~"    #>> Mendefinisikan judul dokumen
 date:  "`r format(Sys.Date(), '%B %d, %Y')`"    #>> Mendefinisikan tanggal dokumen dengan menggunakan fungsi R Sys.Date() untuk mendapatkan tanggal sistem saat ini, dan kemudian memformatnya dengan format "%B %d, %Y" yang menghasilkan format bulan nama, tanggal, dan tahun (contoh: "February 16, 2024").
 output:     #>> 
  rmdformats::robobook:   #>> Menetapkan output format dokumen menggunakan tema "robobook" dari paket rmdformats.
+    toc =5
     section_number: yes    #>> Menetapkan nomor bagian (section number) pada dokumen.
     self_contained: true    #>> Menyatakan bahwa dokumen akan menjadi mandiri (self-contained), artinya semua elemen yang diperlukan untuk tampilan dokumen akan disertakan di dalamnya sendiri.
     thumbnails: true    #>> Mengaktifkan tampilan gambar kecil (thumbnails) di dokumen.
@@ -23,14 +24,13 @@ knitr::opts_chunk$set(class.source = "nocopy",    #>> Ini menggunakan fungsi opt
                       warning = F)    #>> Mengatur agar peringatan (warnings) yang dihasilkan oleh chunk tidak ditampilkan di output dokumen. Jika F (FALSE), maka peringatan tidak ditampilkan.
 ```
 
-<br>     #>> 
-<img style="float: right; margin: -50px 50px 0px 50px; width:30%" src="karennatalie.png"/>     #>> Ini adalah tag HTML untuk menampilkan gambar. Beberapa atribut penting:style: Digunakan untuk menetapkan gaya atau properti tata letak. Dalam hal ini, gambar diatur untuk mengambang (float) ke kanan, memiliki margin negatif pada beberapa sisi, dan lebar setidaknya 30% dari lebar elemen yang mengandungnya.    src: Merujuk ke file gambar "karennatalie.png".
-
-|    #>> Ini adalah pemisah kolom yang mungkin digunakan untuk memisahkan antara dua kolom atau bagian dalam suatu tata letak.
-:---- |:----     #>> adalah bagian dari tata letak tabel yang digunakan untuk membuat dua kolom dengan garis pembatas.
-**Kontak**| **: $\downarrow$**    #>> Membuat judul "Kontak" di kolom pertama dan ikon panah ke bawah di kolom kedua.
-Email| dsciencelabs@outlook.com    #>> 
-Instagram | https://www.instagram.com/dsciencelabs/     #>> 
-RPubs  | https://rpubs.com/dsciencelabs/     #>> 
+<br>     #>> Baris baru
+|
+:---|:---
+**Contact**   |
+Name | Albani   |
+E-mail | al.bani12300@gmail.com    |
+Linkedin | https://www.linkedin.com/in/al-bani-532b06294/ |
+Rpubs | 
 
 ****
