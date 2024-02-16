@@ -1,37 +1,36 @@
 ---
-title: "Teori Resiko"
-subtitle: "~ Tugas Teori Resiko ~"
-sybsubtitle: "Karen Natalie(20204920015)"
-date:  "`r format(Sys.Date(), '%B %d, %Y')`"
-output: 
- rmdformats::robobook:   # https://github.com/juba/rmdformats
-    section_number: yes
-    self_contained: true
-    thumbnails: true
-    lightbox: true
-    gallery: true
-    lib_dir: libs
-    df_print: "paged"
-    code_folding: "show"
-    code_download: yes
-    css: "style.css"
+title: #>>Teori Resiko"    #>>Mendefinisikan judul dokumen 
+subtitle: "~ Tugas Teori Resiko ~"    #>> Mendefinisikan judul dokumen
+date:  "`r format(Sys.Date(), '%B %d, %Y')`"    #>> Mendefinisikan tanggal dokumen dengan menggunakan fungsi R Sys.Date() untuk mendapatkan tanggal sistem saat ini, dan kemudian memformatnya dengan format "%B %d, %Y" yang menghasilkan format bulan nama, tanggal, dan tahun (contoh: "February 16, 2024").
+output:     #>> 
+ rmdformats::robobook:   #>> Menetapkan output format dokumen menggunakan tema "robobook" dari paket rmdformats.
+    section_number: yes    #>> Menetapkan nomor bagian (section number) pada dokumen.
+    self_contained: true    #>> Menyatakan bahwa dokumen akan menjadi mandiri (self-contained), artinya semua elemen yang diperlukan untuk tampilan dokumen akan disertakan di dalamnya sendiri.
+    thumbnails: true    #>> Mengaktifkan tampilan gambar kecil (thumbnails) di dokumen.
+    lightbox: true    #>> Mengaktifkan lightbox, yang biasanya digunakan untuk tampilan gambar dengan overlay pada dokumen.
+    gallery: true    #>> Mengaktifkan galeri gambar di dokumen
+    lib_dir: libs    #>> Menetapkan direktori (directory) untuk menyimpan library (libs) yang mungkin digunakan oleh dokumen.
+    df_print: "paged"    #>> engatur cara mencetak data frame pada dokumen, di sini digunakan "paged" untuk mencetak data frame dengan paginasi.
+    code_folding: "show"    #>> Mengatur lipatan kode (code folding) untuk menunjukkan kode.
+    code_download: yes    #>> Mengaktifkan opsi untuk mengunduh kode yang ada di dokumen
+    css: "style.css"    #>> Menggunakan file CSS dengan nama "style.css" untuk mengatur tata letak dan tampilan dokumen.
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(class.source = "nocopy",
-                      class.output = "nocopy",
-                      message = F,
-                      warning = F)
+knitr::opts_chunk$set(class.source = "nocopy",    #>> Ini menggunakan fungsi opts_chunk$set() dari paket knitr untuk mengatur beberapa opsi global untuk semua chunk di dokumen.
+                      class.output = "nocopy",    #>> Mengatur kelas (class) dari bagian kode sumber (source code) agar tidak dapat disalin (nocopy). Ini mencegah pengguna untuk dengan mudah menyalin kode sumber dari dokumen.
+                      message = F,    #>> Mengatur agar pesan (messages) yang dihasilkan oleh chunk tidak ditampilkan di output dokumen. Jika F (FALSE), maka pesan tidak ditampilkan.
+                      warning = F)    #>> Mengatur agar peringatan (warnings) yang dihasilkan oleh chunk tidak ditampilkan di output dokumen. Jika F (FALSE), maka peringatan tidak ditampilkan.
 ```
 
-<br>
-<img style="float: right; margin: -50px 50px 0px 50px; width:30%" src="karennatalie.png"/> 
+<br>     #>> 
+<img style="float: right; margin: -50px 50px 0px 50px; width:30%" src="karennatalie.png"/>     #>> Ini adalah tag HTML untuk menampilkan gambar. Beberapa atribut penting:style: Digunakan untuk menetapkan gaya atau properti tata letak. Dalam hal ini, gambar diatur untuk mengambang (float) ke kanan, memiliki margin negatif pada beberapa sisi, dan lebar setidaknya 30% dari lebar elemen yang mengandungnya.    src: Merujuk ke file gambar "karennatalie.png".
 
-|
-:---- |:----
-**Kontak**| **: $\downarrow$**
-Email| dsciencelabs@outlook.com
-Instagram | https://www.instagram.com/dsciencelabs/ 
-RPubs  | https://rpubs.com/dsciencelabs/ 
+|    #>> Ini adalah pemisah kolom yang mungkin digunakan untuk memisahkan antara dua kolom atau bagian dalam suatu tata letak.
+:---- |:----     #>> adalah bagian dari tata letak tabel yang digunakan untuk membuat dua kolom dengan garis pembatas.
+**Kontak**| **: $\downarrow$**    #>> Membuat judul "Kontak" di kolom pertama dan ikon panah ke bawah di kolom kedua.
+Email| dsciencelabs@outlook.com    #>> 
+Instagram | https://www.instagram.com/dsciencelabs/     #>> 
+RPubs  | https://rpubs.com/dsciencelabs/     #>> 
 
 ****
