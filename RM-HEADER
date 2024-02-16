@@ -1,1 +1,37 @@
+---
+title: "Teori Resiko"
+subtitle: "~ Tugas Teori Resiko ~"
+sybsubtitle: "Karen Natalie(20204920015)"
+date:  "`r format(Sys.Date(), '%B %d, %Y')`"
+output: 
+ rmdformats::robobook:   # https://github.com/juba/rmdformats
+    section_number: yes
+    self_contained: true
+    thumbnails: true
+    lightbox: true
+    gallery: true
+    lib_dir: libs
+    df_print: "paged"
+    code_folding: "show"
+    code_download: yes
+    css: "style.css"
+---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(class.source = "nocopy",
+                      class.output = "nocopy",
+                      message = F,
+                      warning = F)
+```
+
+<br>
+<img style="float: right; margin: -50px 50px 0px 50px; width:30%" src="karennatalie.png"/> 
+
+|
+:---- |:----
+**Kontak**| **: $\downarrow$**
+Email| dsciencelabs@outlook.com
+Instagram | https://www.instagram.com/dsciencelabs/ 
+RPubs  | https://rpubs.com/dsciencelabs/ 
+
+****
