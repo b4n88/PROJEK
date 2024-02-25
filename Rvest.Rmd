@@ -1,0 +1,134 @@
+---
+title: "Scraping in R with Rvest"
+author : "Albani"
+date : "`r Sys.Date()`"
+output: 
+  html_notebook :
+    theme : journal
+    toc : yes
+    toc_float:
+      collapsed: true
+editor_options: 
+  chunk_output_type: console
+---
+
+# FIRST THINK FIRST
+
+Tulisan ini adalah cara melakukan scraping di R menggunakan `rvest` sebenarnya ada 2 package dalam **R** yang di gunakan untuk scraping data yaitu `rvest` dan `Rselenium` yang membedakan adalah untuk `rvest` di gunakan untuk scraping web statis artinya web itu hanya 1 halaman saja. nah untuk `Rselenium` di gunakan untuk web yang dinamis, artinya untuk web yang punya beberapa halaman. pada tulisan ini akan saya coba scrap dengan `rvest`. Oh iya dalam tulisan ini saya menggunakan web IMDB klik [di sini](https://www.imdb.com/search/title/?title_type=feature&genres=adventure&sort=user_rating,desc&num_votes=25000,) ![Gambar web](C:/Users/Administrator/Downloads/WhatsApp Image 2024-02-12 at 21.40.41.jpeg)
+
+Gambar di atas adalah contoh web yang akan di srap.
+
+oh iya ada beberapa yang harus anda siapkan untuk memudahkan scrap. yaitu :
+
+    Adalah CSS selector
+why that is important? jiah sok english kwkwkkw, kenapa itu penting? karena dalam melakukan scrap membutuhkan tag CSS HTML yang akan menjadi acuan data mana yang akan kita scrap klik [di sini](https://chromewebstore.google.com/detail/css-selector-capture-pro/cpnkcffhllafbdbljkmhebnpbnlhapmd) jika ingin mendownloadnya.
+
+# PERSIAPAAN
+
+## Package
+
+Package yang di gunakan adalah :
+
+```{r echo=TRUE}
+#install.packages("rvest")
+#install.packages("dplyr")
+library(rvest)
+library(dplyr)
+library(tidyverse)
+```
+
+## tag CSS HTML
+
+sebenarnya tahapan ini adalah untuk menentukan data mena saja yang akan kita scrapp. nah dengan menggunakan bantuan CSS Selector maka kita akan di permudah dalam menentukan tag HTML mana. ![gambar2](C:/Users/Administrator/Downloads/WhatsApp Image 2024-02-12 at 21.54.58.jpeg)
+
+nah gambar di atas yang warna *hijau* adalah data yang akan kita ambil. tanda yang berwarna merah adalah tag yang akan menjadi acuan pengambilan data.
+
+dalam hal ini saya sudah menyiapkan data apa saja yang akan kita ambil dan kita simpan di notepad agar membuat sintaks sisa `copy + paste` saja. berikut adalah tag CSS HTML yang akan saya scrap.
+
+    .dli-title:nth-child(1) > judul film
+    .dli-title-metadata-item:nth-child(1) > tahun film
+    .ratingGroup--imdb-rating > rating film
+    .sc-f24f1c5c-0.cPpOqU > Vote film
+    .dli-title-metadata-item:nth-child(2) > Durasi film
+    .ipc-html-content-inner-div > Sinopsis
+
+# LETS DO IT
+
+## Membaca link
+
+```{r}
+link <- "https://www.imdb.com/search/title/?title_type=feature&genres=adventure&sort=user_rating,desc&num_votes=25000,"
+page = read_html(link)
+```
+
+## Eksekusi data
+
+mengambil judul film
+
+```{r}
+name = page %>% 
+  html_nodes(".dli-title:nth-child(1)") %>% 
+  html_text()
+```
+
+mengambil tahun film
+
+```{r}
+year <- page %>% 
+  html_nodes(".dli-title-metadata-item:nth-child(1)") %>% 
+  html_text()
+```
+
+mengambil rating film
+
+```{r}
+rating <- page %>% 
+  html_nodes(".ratingGroup--imdb-rating") %>% 
+  html_text()
+```
+
+Mengambil jumalh vote film
+
+```{r}
+votes <- page %>% 
+  html_nodes(".sc-f24f1c5c-0.cPpOqU") %>% 
+  html_text()
+```
+
+Mengambil durasi film
+
+```{r}
+duration <- page %>% 
+  html_nodes(".dli-title-metadata-item:nth-child(2)") %>% 
+  html_text()
+```
+
+Mengambil sinopsis film
+
+```{r}
+sinopsis <- page %>% 
+  html_nodes(".ipc-html-content-inner-div") %>% 
+  html_text()
+```
+
+Nah setelah data sudah di scrap semua saatnya kita menjadikan dalam data frame seperti di bawah ini, 
+
+```{r}
+moviies <- data.frame(name, year, rating, votes, duration, sinopsis, stringsAsFactors = FALSE)
+head(moviies, 5)
+```
+
+Setelah data siap menjadi data set. kita simpan dalam bentuk csv untuk keperluan eksplorasi dan analisa.
+
+```{r}
+write.csv(moviies, file = "amovies.csv")
+```
+
+# CONCLUTION
+
+Nah hasilnya adalah seperti berikut :
+![gambar4](C:/Users/Administrator/Downloads/WhatsApp Image 2024-02-12 at 22.37.19.jpeg)
+
+nahhhh selesaiii, next akan kita bahas cara scrap dengan Rselenium.
+
+share share share!!

@@ -1,0 +1,141 @@
+---
+title: "Validitas dan Reliabilitas Tes"
+subtitle: "~ Penggunaan keseharian ~"
+author: "Albani"
+date: "` r Sys.Date()"
+output: 
+  rmdformats::robobook:
+    toc: 4
+    section_number: yes
+    self_contained: true
+    thumbnails: true
+    lightbox: true
+    gallery: true
+    lib_dir: true
+    df_print: "paged"
+    code_folding: "show"
+    code_download: yes
+    css: "style.css"
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = F,
+                      warning = F)
+```
+
+<br>
+
+|
+:---|:---
+**Contact**   |
+Name | Albani   |
+E-mail | albani.baga@gmail.com    |
+Linkedin | https://www.linkedin.com/in/al-bani-532b06294/
+
+****
+
+# EPILOG
+
+pernah kah kita berfikir tentang apakah kuisioner kita sudah cukup valid dengan jawaban responden? atau apakah cukup Reliabel? kadang mungking kita mikir wadduh gimana kalo salah nih kuisioner?. Analysis gagal? waduh waduh di marah bos kah?.. Over thingking aja tross ampe types kwkwkkw. 
+
+Jadi dari pada over thingking lebih baik melakukan uji coba. Tulisan ini mungkin bisa membantu biar ga over. Yes dengan melakukan *Uji Validitas* dan *Uji Reliabilitas*. 
+
+    Uji validitas dan reliabilitas bertujuan untuk mengecek apakah kuesioner atau items pertanyaan yang kita buat sudah baik atau belum.
+
+****
+
+# PREPARATION
+
+## PACKAGE
+
+Package yang digunaakn adalah : 
+
+```{r}
+library(readxl)           # Untuk membaca excel
+library(tidyverse)        # Untuk membantu mengubah dan menyajikan data dengan lebih baik
+library(psych)            # Untuk visualisasi data, analisis faktor, analisis reliabilitas, analisis korelasi, dan banyak lagi.
+library(ltm)              # Untuk analisis data dikotomis dan politomus multivariat
+library(dplyr)
+```
+
+Untuk penjelasan lebih jelasnya sangat banyak di Google. bisa jalan jalan ke sana atau pakai ChatGPT ya Evort dikit lah nuntut ilmu kwkwk...
+
+## DATA SET
+
+Untuk contoh kasus dalam bisnis, kita bisa jalan-jalan di `Kaggle`. Data yang akan digunakan adalah **Starbucks Customer Survey** untuk mengetahui data tersebut bisa dengan mengklik [di sini](https://www.kaggle.com/datasets/mahirahmzh/starbucks-customer-retention-malaysia-survey) silahkan di download.
+
+## CLEANING DATA
+
+```{r}
+# aksess data
+Customer_Survey <- read.csv("D:/R/1 DATA SET/Starbuck customer survey/Starbucks satisfactory survey.csv",sep = ",", header = T)
+head(Customer_Survey, 4)
+```
+```{r}
+str(Customer_Survey)
+```
+Data di atas yang akan kita gunakan adalah `X12` - `X19` karena data yang yang sesuai scala likert adalah data tersebut. sehingga data tersebut saja yang akan kita analisa.
+
+```{r}
+Customer_fiks <- Customer_Survey[, 13:19]       #[a,b] a adalah baris, b adalah colom (penggunaan [])
+str(Customer_fiks)
+```
+Data yang kita gunakan adalah data yang bernama `Customerfiks`. Namun header data kita panjang sekali. kita akan coba mengubahnya dengan nama yang mudah di ingat.
+
+```{r}
+colnames(Customer_fiks) <- paste0("X", 1:ncol(Customer_fiks))    # Merubah nama variable
+Customer_fiks$id <- 1:nrow(Customer_fiks)      # Menambahkan colom baru berupa id
+Customer_fiks <- cbind(id=Customer_fiks$id, Customer_fiks[, !names(Customer_fiks) %in% "id"])     # Mengubah colom id menjadi paling depan.
+str(Customer_fiks)
+```
+Oke.. datanya sudah rapih kek doi yang mau malmingan. selanjutnya langsung di gass.
+
+****
+
+# TEST
+
+## VALIDITY TEST
+
+Uji ini memang lebih sering dipakai oleh rekan-rekan di jurusan sosial karena terkait design alat pengukuran (kuesioner) yang menggunakan skala likert. Untuk menguji validitas, kita cukup menghitung korelasi antar variabel terhadap variabel totalnya.
+
+Banyak pihak juga yang berargumen bahwa item-total correlations tidak bisa digunakan untuk melihat validitas, which is quite true dan validitas itu ada berbagai macam jenisnya (face validity, content validity, dan lainnya). Tapi untuk kepentingan praktis metode yang dijelaskan di blog ini adalah metode yang paling sering dipakai. Cuma tujuan utamanya adalah untuk nge-drop item yang tidak sejalan dengan apa yang kuisionernya ukur. 
+
+Uji validitas dilakukan dengan cara membuat satu variabel (kolom) baru berisi penjumlahan dari semua variabel rates yang ada. Misalkan saya definisikan variabel baru bernama `Data_validity` sebagai berikut:
+
+```{r}
+Customer_fiks = Customer_fiks %>% 
+  mutate(Data_validity = X1+X2+X3+X4+X5+X6+X7)
+head(Customer_fiks, 10)
+```
+Untuk menguji validitas, kita cukup menghitung korelasi antar variabel terhadap variabel totalnya
+```{r}
+data_without_id <- Customer_fiks[ ,2:9]
+round(cor(data_without_id), 2) 
+```
+
+
+Terlihat bahwa semua items memiliki korelasi `>0.5` terhadap starbucks_rate yang berarti semua items tersebut valid (sejalan dengan apa yang kuisionernya ukur).
+
+****
+
+## RELIABILITY TEST
+
+uji ini memang lebih sering dipakai oleh rekan-rekan di jurusan sosial karena terkait design alat pengukuran (kuesioner) yang menggunakan skala likert. Uji reliabilitas digunakan untuk melihat konsistensi responden dalam menjawab kuisioner. Uji ini dilakukan terhadap seluruh pertanyaan yang ada. 
+
+Kita akan melihat nilai Cronbach’s Alpha sebagai pedoman: 
+
+    Jika nilai Cronbach’s Alpha > 60 maka reliabel. 
+
+    Jika nilai Cronbach’s Alpha < 60 maka tidak reliabel. 
+
+Untuk menghitung Cronbach’s Alpha, saya menggunakan library(psych). 
+
+```{r}
+alpha(data_without_id)
+```
+Nilai `Cronbach’s Alpha` dapat dilihat dari nilai `raw_alpha`, yakni sebesar `0.79`, artinya kuesioner yang kita gunakan sudah reliabel.
+
+Selanjutnya, kita bisa melihat data raw_alpha per variabel. Nilai raw_alpha tersebut mengindikasikan besaran raw_alpha dari kuesioner jika item tersebut dihapus (Reliability if an item is dropped).
+
+****
+
+Silahkan di Share ya. Terimakasih

@@ -1,0 +1,77 @@
+---
+title: "UJI NORMALITAS DATA"
+author: "Albani"
+date : "`r Sys.Date()`"
+output: 
+  prettydoc::html_pretty:
+    theme: cayman
+    toc: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+Ditulisan ini saya ingin menuliskan bagaimana cara melihat data yang kita punya berdistribusi normal atau tidak. kenapa data itu harus di cek ini sudah saya tuliskan dalam notebook saya klik di sini. Seperti yang kita ketahui, untuk menguji apakah suatu data berdistribusi normal atau tidak, kita bisa menggunakan setidaknya dua metode. Yakni: **Kolmogorov-Smirnov** dan **Shapiro-Wilk**. Jika `n < 50` gunakan **Shapiro-Wilk** sedangkan saat `n > 50` gunakan **Kolmogorov-Smirnov**.
+
+## Package
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(readxl)
+```
+
+## Explore file
+
+```{r}
+data <- read_excel("D:/R/NORMAL DISTRIBUTION/SERVICE LEVEL.xlsx", sheet = "Sheet1")
+glimpse(data)
+```
+
+Karena data di atas terdiri dari 200 baris data artinya `> 50` sehingga metode yang kita gunakan adalah **Kolmogorov-Smirnov** ingat yak bukan **Shapiro-Wilk**
+
+## HIPOTESIS
+
+cek normalitas juga merupakan uji hipotesis, maka langkah-langkah yang harus ditempuh:
+
+  Tentukan hipotesis nol dan alternatif:
+
+    H_0: Data berdistribusi normal.
+    H_1: Data tidak berdistribusi normal.
+
+Maka dalam hal ini kita akan mengetahui apakah data kita colom `A, B, dan C` adalah berdistribusi normal atau tidak.
+
+## PROSESS
+
+```{r}
+test.a <- ks.test(data$ervice.level.a, 'pnorm')
+test.b <- ks.test(data$service.level.b, 'pnorm')
+test.c <- ks.test(data$service.level.c, 'pnorm')
+
+hasil <- data.frame(
+  vendor = c('A', 'B', 'C'),
+  p_value = c(test.a$p.value, test.b$p.value, test.c$p.value)
+) %>% 
+  mutate(Hipotesis =  ifelse(p_value < 0.05, 'Tolak H0', 'H0  di terima'),
+         kesimpulan = ifelse(p_value < 0.05, 'Data tidak berdistribusi normal', 'Data berdistibusi Normal')
+         )
+kable(hasil)
+```
+Ternyata didapatkan bahwa ketiga data vendor tersebut tidak berdistribusi normal. 
+
+selanjutnya kita bisa melakukan langkah langkah selanjutnya dalam analisa data. tulisnya akan di simpan dalam tulisan yang lain.
+
+## Tambahan
+
+kalau pakai Kolomogorofkan menggunakan sintx `ks.test(data$ervice.level.a, 'pnorm')` lalu kalau shapiro gimana gaes? 
+
+mungkin ada yang bertanya seperti demikian. jadi caranya adalah :
+
+```{r}
+shapiro.test(data$ervice.level.a)
+```
+P valueny lebih dari 0.5 artinya H0 di terima. et dah jangan lupa ini hanya contoh. shappiro ini gak berlaku karna apa?
+
+benar, karna datanya >50.
+
+Semoga bermanfaat.
+
