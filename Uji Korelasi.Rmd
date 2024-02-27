@@ -117,40 +117,104 @@ library(readr)
 ```
 
 
-## Data Set
+## Data Set Preparation
+
+Data yang akan di gunakana adalah data set yang saya buat buat sendiri. klik [di sini](https://www.kaggle.com/datasets/b4n889/exercise-corelation-test?select=Uji+Korelasi.csv) jika ingin mengambil ya..
 
 ```{r}
+Data_corelation = read.csv("D:/R/1 DATA SET/Korelatio test/Uji Korelasi.csv", header = T, sep = ";")
+Data_corelation = Data_corelation %>% mutate(No = row_number())
+Data_corelation = Data_corelation %>% select(No, everything())
+head(Data_corelation, 6)
+```
+Di atas saya coba otak atik datanyam biar keren, ada nomor tiap baris.
 
+Selanjutnya memilih data yang akan kita korelasikan. ingat syarat korealsi tidak boleh ada data yang menggunakan teks. mari lihat data yang di gunakan.
+
+```{r}
+str(Data_corelation)
+```
+Data di atas banyak sekali yang bertype character, sehingga akan kita ubah dulu menjadi data yang sesuai.
+```{r}
+Data_corelation$Store_Type = as.factor(Data_corelation$Store_Type)
+Data_corelation$Region_Code = as.factor(Data_corelation$Region_Code)
+Data_corelation$Store_Type = as.factor(Data_corelation$Location_Type)
+Data_corelation$Date = as.Date(Data_corelation$Date, format = "%m/%d/%y")
+Data_corelation$Discount = as.factor(Data_corelation$Discount)
+Data_corelation$Location_Type = as.factor(Data_corelation$Location_Type)
+Data_corelation$sales = as.numeric(gsub(",", "", Data_corelation$sales))
+```
+Data setelah di edit
+```{r}
+str(Data_corelation)
+```
+Data sudah oke, namun kita akan mengambil beberapa variable saja yang di butuhkan, sebap untuk menguji korelasi tidak semua data akan di uji. contoh nya adalah No dan ID ini sudah pasti independen, tidak ada pengaruh terhadap varible lainnya.
+
+```{r}
+Data_corelation_final = Data_corelation %>% select(-No, -ID, -Date, -Store_id)
+str(Data_corelation_final)
+```
+
+```{r}
+Data_corelation_final_sekali <- mutate_all(Data_corelation_final, as.numeric)
+```
+```{r}
+str(Data_corelation_final_sekali)
 ```
 
 
 ## Korelation test
 
+Selanjutnya adalah melihat korelasi dengan menggunakan berbagai methode `Korelasi` yang mana setiap methode penggunaanya tergantung setiap data.
+
 ### 1. Korelasi Pearson
 ```{r}
-
+pearson <- cor(Data_corelation_final_sekali, method = "pearson")
+```
+```{r}
+corrplot(pearson, method = "circle", type = "full", bg = "blue")
 ```
 
 ### 2. Korelasi Spearman
 ```{r}
-
+Spearman = cor(Data_corelation_final_sekali, method = "spearman")
+corrplot(Spearman, method = "number", bg = "black", type = "full")
 ```
 
 ### 3. Korelasi Kendal
 ```{r}
-
+kendall = cor(Data_corelation_final_sekali, method = "kendall")
+corrplot(kendall, method = "square", bg = "lightgreen")
 ```
 
 ### 4. Korelasi Pointbeserial
 ```{r}
-
+library(polycor)
+Pointbeserial = polyserial(Data_corelation_final_sekali$Discount, Data_corelation_final_sekali$Region_Code)
+print(Pointbeserial)
 ```
-
+sangat kecil korelasinya.
 
 ### 5. Korelasi Phi
 ```{r}
-
+Data_corelation_final_sekali_phi = table(Data_corelation_final$Discount, Data_corelation_final$Location_Type)
+phi = chisq.test(Data_corelation_final_sekali_phi)
+print(phi)
 ```
+Jika nilai p sangat tinggi, dapat diartikan bahwa tidak ada bukti yang cukup untuk mendukung adanya hubungan antara variabel-variabel yang diuji.
+
+### 6, Plot Corelation
+
+```{r}
+library(PerformanceAnalytics)
+```
+
+```{r}
+chart.Correlation(Spearman, histogram = TRUE, pch = 19)
+```
+
+
+
 
 </div>
 
