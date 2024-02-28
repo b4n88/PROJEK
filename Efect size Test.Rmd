@@ -1,0 +1,106 @@
+---
+title: "Efect size Test"
+author: "Albani"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    code_folding : "show"
+    code_download : yes
+    theme : simplex
+    toc : yes
+    toc_float : 
+      collapsed : True
+---
+
+<div style="text-align: justify;">
+
+# Effect size Test 
+
+Dari tema di atas adalah melihat seberapa besar perbedaan data. Nah loh.. Seberapa besar perbedaan data artinya apakah data A dan B berbeda?? 
+
+Bah kalau untuk melihat apakah ada perbedaan antara A dan B bukannya bisa dengan menggunakan uji T ?? Kenapa harus nguji Cohen's d dan Wilcoxon's V ?? 
+
+Ada yang mikir sama nggak ? 
+
+Oke jadi gini mbak/mba.. 
+
+Jadi Uji T dan Uji Cohen's D, adalah uji yang berbeda. Bedanya di mana? 
+
+    Uji t: Memberikan informasi apakah perbedaan antara kelompok-kelompok tersebut signifikan secara statistik. 
+
+    Cohen's d: Memberikan informasi tambahan tentang ukuran seberapa besar perbedaan tersebut, membantu dalam menginterpretasikan signifikansi praktis atau klinis. 
+
+Gimana udah kebayang? 
+
+Jadi Uji T ini hanya menjawab berbeda atau nggak, sedangkan Cohen's D memberikan informasi gambaran seberapa besar perbedaan tersebut. 
+
+Lalu apa bedanya Cohen's d dan wilcoxon's V ? 
+
+Sama seperti Uji T dan Man Withney, yang melihat apakah bagian dari stats Parametrik dan non parametrik. Masih ingatkan, apa itu Parametrik dan Non parametrik. 
+
+Parametrik = data berdistribusi Normal. 
+
+Nonparametrik = data tidak berdistribusi Normal. 
+
+Kesimpulannya adalah sebelum melakukan Ujicohen's d, sebaiknya melakukan uji T terlebih dahulu. Kenapa? Agar kita bisa melihat apakah ada perbedaan atau tidaknya dahulu. Bayangkan kalau kita mau melakukan uji seberapa besar data itu berbeda kalau data itu apakah ada perbedaaan atau tidaknya saja kita tidak mengetahuinya. 
+
+## Cohen's d  
+
+Cohen's d mengkarakterisasi ukuran efek dengan menghubungkan perbedaan rata-rata dengan variabilitas, Cohen's d adalah ukuran efek standar untuk mengukur perbedaan antara dua rata-rata kelompok. Seringkali, Anda akan menggunakannya saat membandingkan pengobatan dengan kelompok kontrol. Ini bisa menjadi ukuran efek yang cocok untuk disertakan dengan hasil uji-t dan ANOVA.  
+
+Untuk uji ini di lakukan untuk data yang berdistribusi Normal ya.. 
+
+## Wilcoxon's V  
+
+Uji ini sama juga dengan Cohen's d, yaitu ukuran efek data. Bedanya adalah di gunakan ketika data tidak berdistribusi normal. 
+
+****
+
+# Menghitung Effect size test
+
+## Alur Effect size test
+
+
+## Package
+
+```{r}
+
+```
+
+
+## Execute
+
+### Data set
+
+
+### Cohens D
+
+
+### Wilcoxon's V
+
+
+</div>
+
+# Source
+
+- www.google.com
+- www.rpubs.com
+- www.kaggle.com
+
+****
+# Contact
+
+|               |                                                                           |
+| :---          | :---                                                                      |
+| **Kontak**    |                                                                           |
+| Name          | Albani                                                                    |
+| E-mail        | albani.baga@gmail.com                                                     |
+| LinkedIn      | [Profil LinkedIn Al Bani](https://www.linkedin.com/in/al-bani-532b06294/) |
+
+****
+
+
+
+
+
+
