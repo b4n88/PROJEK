@@ -60,24 +60,128 @@ Uji ini sama juga dengan Cohen's d, yaitu ukuran efek data. Bedanya adalah di gu
 
 ## Alur Effect size test
 
+Hal pertama yang harus kita lakukan adalah niat, jiah kwkwkkw nggak deng, pertama adalah pemanasan dulu,, eh gmn gmn,, di kira mau marathon. jadi :
+
+- Mengecek Distribusi data
+- Melakukan Uji perbedaan data
+- Melakukan Alur Effect size test.
 
 ## Package
 
 ```{r}
-
+library(effectsize)
+library(readr)
+library(tidyverse)
+library(dplyr)
 ```
 
+# Execute
 
-## Execute
+## Data set
 
-### Data set
+Data set yang akan kita guanakn adalah data gaji yang di dummy.
+```{r}
+Sallary_dataset = read.csv("D:/R/1 DATA SET/Salary_dataset.csv", header = T, sep = ",")
+str(Sallary_dataset)
+```
+Data set di atas sudah oke sisa kita coba cek Distribusi datanya, masih ingatkan ?
 
+### Normality test
 
-### Cohens D
+Karena data terdiri dari 30 baris artinya `n < 50` maka uji yang di gunakan adalah `Shapiro-Wilk` test. bukan Kolmogorov karena daanya < 30.
 
+```{r}
+tes_a = shapiro.test(Sallary_dataset$YearsExperience)
+tes_b = shapiro.test(Sallary_dataset$YearsExperience2)
+```
 
-### Wilcoxon's V
+```{r}
+hasil = data.frame(
+  Jenis_data = c('A', 'B'),
+  p_value = c(tes_a$p.value, tes_b$p.value)
+) %>% 
+  mutate( Hipotesis = ifelse(p_value < 0.05, 'Tolak H0','Terima H0'),
+          Kesimpulan = ifelse(p_value < 0.05, 'Data tidak Berdistribusi normal', ' Berdistribusi Normal')
+  )
+print(hasil)
+```
 
+Oke Data sudah normal, sekarang kita cek apakah ada perbedaan yang signifikan dari data di atas?
+
+### T test (Uji apakah ada perbedaan antar data)
+
+```{r}
+Uji_perbedaan = t.test(Sallary_dataset$YearsExperience, Sallary_dataset$YearsExperience2, paired = FALSE)
+perbedaan = ifelse(Uji_perbedaan$p.value < 0.05, 'Tidak ada perbedaan', 'Ada perbedaan')
+hasil2 = data.frame(uji = 'Apakah ada perbedaan ?',
+                    p_value = Uji_perbedaan$p.value,
+                    Kesimpulan = perbedaan
+                    )
+print(hasil2)
+```
+
+data kita sudah di uji bahwa ada perbedaa, sekarang masalahnya adalah seberapa jauh data perbedannya?
+
+## Cohens D
+
+Kita menggunaakn `Cohens D` untuk melakukan uji seberapa besar efek perubahan data? sebap data berdistribusi normal. sesuai penjelasan di awal ketika parametrik (Berdistribusi normal) maka mengguanakkn `Cohens D`
+
+```{r}
+Result_Cohen = cohens_d(Sallary_dataset$YearsExperience, Sallary_dataset$YearsExperience2)
+print(Result_Cohen)
+```
+
+Dalam hasil Cohen's d :
+
+    Nilai Cohen's d adalah -0.35.
+    Interval kepercayaan 95% untuk Cohen's d adalah [-0.86, 0.16].
+    Estimasi ini dilakukan dengan menggunakan deviasi standar (SD) yang digabungkan (pooled SD).
+
+Interpretasi:
+
+    Nilai Cohen's d:
+        Nilai Cohen's d adalah -0.35. Ini menunjukkan bahwa efeknya kecil, dan arah efek negatif menunjukkan bahwa kelompok pertama cenderung memiliki nilai yang lebih rendah daripada kelompok kedua.
+
+    Interval Kepercayaan (CI):
+        Interval kepercayaan 95% untuk Cohen's d adalah [-0.86, 0.16]. Ini menyatakan bahwa kita 95% yakin bahwa nilai sebenarnya dari Cohen's d berada dalam rentang ini. Jika rentang ini mencakup nilai 0, kita dapat menyimpulkan bahwa efeknya mungkin tidak signifikan secara statistik.
+
+    Penggunaan Pooled SD:
+        Pooled SD digunakan untuk mengestimasi variabilitas di seluruh kelompok. Ini adalah pendekatan umum, terutama ketika diasumsikan bahwa variabilitas di kedua kelompok relatif sama.
+
+Kesimpulannya, meskipun nilai Cohen's d adalah negatif, rentang interval kepercayaan mencakup nilai 0, yang menunjukkan bahwa efeknya mungkin tidak signifikan secara statistik. Perlu diingat bahwa interpretasi nilai Cohen's d juga bergantung pada konteks spesifik eksperimen atau studi.
+
+## Wilcoxon's V
+
+Mari kita berandai andai, jika data adalah uji nonparametrik (data tidak berdistribusi normal) maka kita akan menngunakan uji `Wilcoxon's V`. maka :
+
+```{r}
+Wilcoxons_V = wilcox.test(Sallary_dataset$YearsExperience, Sallary_dataset$YearsExperience2, paired = T)
+```
+Warning "cannot compute exact p-value with ties" muncul ketika terdapat pengamatan yang memiliki nilai yang sama (ties) dalam kelompok data yang Anda gunakan untuk uji Wilcoxon signed-rank. Uji Wilcoxon memerlukan peringkat data, dan jika terdapat nilai yang sama, peringkat mungkin tidak unik dan menyebabkan kesulitan dalam menghitung nilai p secara eksak.
+
+```{r}
+# Melakukan Wilcoxon signed-rank test dengan aproksimasi p-value
+wilcox_test_result <- wilcox.test(Sallary_dataset$YearsExperience, Sallary_dataset$YearsExperience2, paired = TRUE, exact = FALSE)
+wilcox_test_result
+```
+Hasil uji Wilcoxon signed-rank test dengan koreksi kontinuitas yang Anda berikan adalah sebagai berikut:
+
+    Statistik Uji Wilcoxon (V): 0
+    Nilai p (p-value): 1.537e-07 (sebuah nilai yang sangat kecil)
+    Hipotesis alternatif: Pergeseran lokasi sebenarnya tidak sama dengan 0
+
+Interpretasi hasil:
+
+    Statistik Uji Wilcoxon (V):
+        Statistik Uji Wilcoxon (V) adalah 0. Ini adalah nilai peringkat yang dihitung dari seluruh pasangan data. Dalam konteks Wilcoxon signed-rank test, nilai V mencerminkan sejauh mana data telah bergeser dari nol.
+
+    Nilai p (P-value):
+        Nilai p sangat kecil (1.537e-07), jauh di bawah tingkat signifikansi umum (0.05). Hal ini menunjukkan bahwa terdapat bukti statistik yang sangat kuat untuk menolak hipotesis nol. Dengan kata lain, ada perbedaan yang signifikan antara dua kelompok.
+
+    Hipotesis Alternatif:
+        Hipotesis alternatif menyatakan bahwa pergeseran lokasi sebenarnya tidak sama dengan 0. Hasil p-value yang sangat kecil mendukung hipotesis alternatif ini.
+
+Dengan nilai p yang sangat kecil, Anda dapat menyimpulkan bahwa ada perbedaan signifikan antara kelompok YearsExperience dan YearsExperience2. Hipotesis nol yang menyatakan tidak ada pergeseran lokasi signifikan ditolak. Hal ini dapat diartikan sebagai adanya perubahan yang signifikan antara dua kondisi atau waktu yang diukur oleh variabel YearsExperience.
 
 </div>
 
