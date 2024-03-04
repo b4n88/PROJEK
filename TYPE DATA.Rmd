@@ -1,0 +1,110 @@
+---
+title: "Basic Test in Stats"
+author: "Albani"
+date: "2024-03-04"
+output: 
+  rmdformats::downcute:
+    code_folding: show
+    code_download: yes
+    self_contained: true
+    lightbox: true
+    default_style: "dark"
+    highlight: NULL
+    downcute_theme: "chaos"
+    use_bookdown: false
+---
+
+```{r, include=TRUE, echo=TRUE}
+library(knitr)
+```
+
+
+# Uji Hipotesis
+
+Test dalam Statistika, apa saja yang ada dalam Statistika silahkan lihat class diagram di bawah ini : 
+```{r, warning=FALSE}
+include_graphics("C:/Users/VIRTUAL/Downloads/WhatsApp Image 2024-03-04 at 09.06.43.jpeg")
+```
+Diagram di atas penjelasanya adalah sebagai berikut : Dalam Uji hipotesis atau uji Statistika terbagi menjadi 2, parametrik dan non parametrik. Kapan di gunakan parametrik dan non parametrik? Syaratnya adalah dari distribusi. Berdistribusi normal atau tidak. Jika data berdistribusi Normal maka melakukan uji parametrik sebaliknya jika data tidak berdistribusi normal maka menggunakan Non parametrik.     
+
+
+# Uji Stats
+
+Selanjutnya uji apa saja yang ada dalam parametrik dan non parametrik? Ini akan di bahas berbeda kalau di sini bisa panjang hahaha.. Lihat dulu class diagram berikut. 
+
+```{r, warning=FALSE}
+include_graphics("C:/Users/VIRTUAL/Downloads/WhatsApp Image 2024-03-04 at 00.45.33.jpeg")
+```
+
+# T Test, Z Test dan Man Withney 
+
+Ke 3 test ini di gunakan ketika samplenya `Independen` atau tidak memiliki hubungan. Nah harus juga mengetahui distribusi data.  jika datanya normal (Di sebut `parametrik`) maka mengguanakn `T test` dan `Z test`, jika datanya tidak berdistribusi normal (Disebut `Non Parametrik`) maka mengguanakn `Man Witney Test`. Lalu yang membedakan `T test` dan `Z test` apa?  jadi untuk `Z test` di gunakan ketika varianasi di ambil dari populasi makasudhnya adalah data yang di guanakan data populasi bukan sample. Ketika kita maenggunakn sample maka T test harus di pakai untuk pengujian. 
+
+Contoh data Indenden atau tidakmemiliki hubungan antar variable adalah ketika kita ingin menguji perbedaan signifikan antara nilai kelas 6 A dan 6 B. 
+
+Contoh lain adalah melihat perbandingan antar produk A dan B. 
+
+# Paired T test dan  Wilcoxon Test
+
+Kebalikan dari ke 3 test di atas, sample `Dependen` atau data memiliki hubungan, biasanya menguji sebap akibat.  sama juga dengan syaratnya datanya parametrik atau non parametrik (normal atau tidak) jika berdistribusi normal maka gunakan `Paired T test` sebaliknya jika tidak berdistribusi normal guanakan `Wilcoxon Test` . `Paired T Test` adalah uji sebeluam dan sesudah dalam R. Syarat dari uji ini salah satunya adalah kedua sample harus memiliki jumlah baris yang sama. 
+
+# Bonus T Test
+
+`T test` tidak cocok untuk menguji perbandingan lebih dari dua kelompok, karena `t test` termasuk dalam uji perbedaan parametrik dengan asumsi sebagai berikut: 
+
+- Skala yang digunakan untuk mengumpulkan data adalah skala ordinal atau kontinu, misalnya skor tes IQ. 
+
+- Data harus terdistribusi normal dan memiliki grafik berbentuk kurva lonceng. 
+
+- Setiap kelompok yang diujikan memiliki varians yang sama (homogen). 
+
+- Sampel yang diujikan merupakan sampel yang diambil secara acak (random sampling) dari kedua kelompok yang ingin diuji. 
+
+# Jenis T test
+
+Jika data cocok dengan asumsi di atas, bisa dilanjutkan dengan memilih jenis `t test` yang akan dilakukan tergantung pada tujuannya, `t test` dibagi menjadi lima: 
+
+## Paired T Test
+
+- Untuk mengukur sebelum dan sesudah perlakuan pada dua kelompok dari sebuah populasi, maka gunakan `paired t-test`.  
+
+contoh kasus bisnis yang melibatkan pengukuran sebelum dan sesudah penerapan suatu strategi atau perubahan dalam suatu perusahaan. Misalnya, kita ingin mengukur pengaruh pelatihan karyawan terhadap produktivitas mereka di tempat kerja.
+
+    Perusahaan ABC ingin meningkatkan produktivitas karyawan mereka melalui pelatihan khusus. Mereka mengukur tingkat produktivitas sebelum dan sesudah pelatihan menggunakan beberapa indikator kinerja karyawan.
+
+## Two-sample T-test
+
+- Untuk mengukur sebelum dan sesudah perlakuan pada dua kelompok dari populasi yang berbeda, maka gunakan `two-sample t-test`. 
+
+Contoh kasus bisnis yang melibatkan perbandingan dua kelompok yang berbeda dalam suatu organisasi. Misalnya, kita ingin mengetahui apakah ada perbedaan signifikan dalam waktu penyelesaian tugas antara dua tim di departemen pengembangan perangkat lunak.
+
+    Departemen pengembangan perangkat lunak memiliki dua tim, Tim A dan Tim B. Manajemen ingin mengetahui apakah ada perbedaan signifikan dalam waktu penyelesaian tugas antara kedua tim ini.
+
+## One Samle T test
+
+- Untuk mengukur satu kelompok dengan nilai yang sudah terstandar, maka gunakan `one-sample t test`. a
+
+Contoh kasus bisnis yang melibatkan pengukuran satu kelompok dan kita ingin menilai apakah rata-rata dari kelompok tersebut berbeda dari nilai referensi yang sudah ditentukan sebelumnya.
+
+    Contoh Penggunaan listrik dalam desa memiliki rata-rata 100kwh apakah ini benar?
+    
+    Perusahaan XYZ ingin menilai kepuasan pelanggan terhadap layanan pelanggan baru yang diperkenalkan. Mereka ingin tahu apakah rata-rata nilai kepuasan pelanggan yang diperoleh melalui survei berbeda dari nilai referensi 80 (nilai maksimal).
+
+## Two-tailed t test
+
+- Untuk mengetahui apakah kedua kelompok dari dua populasi memiliki perbedaan satu sama lain, maka gunakan `two-tailed t test`. 
+
+Mari kita anggap kita memiliki sebuah perusahaan yang meluncurkan kampanye pemasaran baru dan kita ingin mengetahui apakah ada perubahan signifikan dalam tingkat konversi penjualan. Dalam hal ini, kita akan menggunakan two-tailed t-test untuk menguji apakah rata-rata konversi berbeda dari nilai referensi yang ditentukan sebelumnya. Studi Kasus: **Evaluasi Kampanye Pemasaran**
+
+Perusahaan ABC meluncurkan kampanye pemasaran baru untuk meningkatkan tingkat konversi penjualan. Mereka ingin tahu apakah rata-rata konversi penjualan dari kampanye ini berbeda dari rata-rata konversi sebelum kampanye.
+
+## One-tailed t test
+
+- Untuk mengetahui seberapa besar perbedaan rata-rata antara satu populasi dengan yang lain, maka gunakan `one-tailed t test`.  
+
+Mari kita mengambil contoh kasus bisnis yang melibatkan evaluasi kinerja karyawan dengan menggunakan one-tailed t-test. Misalkan perusahaan ingin mengetahui apakah program pelatihan baru telah meningkatkan produktivitas karyawan, dan kita ingin fokus pada kemungkinan peningkatan daripada penurunan. Studi Kasus: Evaluasi Program Pelatihan
+     
+     Perusahaan ABC telah melaksanakan program pelatihan baru dan ingin menilai apakah ada peningkatan signifikan dalam produktivitas karyawan.
+
+nah memahami ini akan kita coba study case dengan real data. semoga bermanfaat.
+
