@@ -84,7 +84,16 @@ Misalkan kita ingin memeriksa pengaruh dua faktor, yaitu dosis obat (A: rendah, 
 
 ## Package
 
-A
+package yang di gunakan adalah :
+```{r}
+library(knitr)
+library(readr)
+library(readxl)
+library(tidyselect)
+library(dplyr)
+library(stats)
+library(httr)
+```
 
 ---
 
