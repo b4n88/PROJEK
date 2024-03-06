@@ -1,0 +1,130 @@
+---
+title: "ANOVA ANALISIS"
+author: "Albani"
+date: "2024-03-06"
+output:
+  rmdformats::downcute:
+    code_folding : show
+    code_download : yes
+    self_contained: true
+    thumbnils: true
+    lightbox: true
+    highlight: NULL
+    use_bookdown: false
+pkgdown:
+  as_is: true
+---
+
+# Pengertian Anova
+ANOVA dapat digunakan untuk memahami apakah terdapat perbedaan yang signifikan antara rata-rata hasil atau kinerja dari beberapa kelompok. 
+
+Jadi Anova itu melakukan perbandingan data. Kalau hanya perbandingan data? Kenapa gak pakai Uji T atau Z aja? Kenapa mesti harus pakai ANOVA?? 
+
+Pertanyaan yang sangat Intelek saudara-saudara. 
+
+ANOVA memang fokus pada pemeriksaan perbedaan antara tiga atau lebih kelompok, tetapi pendekatan ini lebih spesifik. ANOVA tidak hanya menentukan bahwa ada perbedaan, tetapi juga memberikan informasi tentang di mana perbedaan tersebut terletak. Dengan kata lain, ANOVA membantu mengidentifikasi kelompok yang memiliki rata-rata yang berbeda secara signifikan di antara beberapa kelompok. 
+
+Perbedaan utama antara uji-t dan ANOVA terletak pada jumlah kelompok yang dianalisis. Uji-t digunakan ketika hanya ada dua kelompok yang dibandingkan, sementara ANOVA digunakan ketika ada tiga atau lebih kelompok. ANOVA dapat meminimalkan risiko kesalahan tipe I yang dapat terjadi jika Anda melakukan beberapa uji-t secara berulang kali pada set data yang sama. 
+
+ 
+
+ANOVA umumnya digunakan ketika Anda memiliki lebih dari dua kelompok atau variabel bebas yang ingin Anda bandingkan. Ini bisa berupa satu variabel dependen yang diukur dalam berbagai kelompok atau dua atau lebih variabel independen yang berpotensi mempengaruhi variabel dependen. 
+
+ 
+
+Jadi Anova di gunakan ketika data yang akan di analisa perbedaanya berjumlah 3 Variable. 
+
+
+---
+
+## One-Way Anova 
+One-Way ANOVA digunakan ketika kita ingin membandingkan rata-rata dari tiga atau lebih kelompok yang berbeda. Ini memeriksa apakah terdapat perbedaan yang signifikan antara kelompok-kelompok tersebut. 
+
+Contoh Kasus: Pengaruh Dosis Obat Terhadap Penurunan Tekanan Darah 
+
+Misalkan kita ingin menguji pengaruh dosis obat terhadap penurunan tekanan darah pada pasien. Kita memiliki tiga kelompok pasien yang menerima dosis obat yang berbeda: kelompok A (dosis rendah), kelompok B (dosis sedang), dan kelompok C (dosis tinggi). 
+
+---
+
+## Two-Way ANOVA
+Two-Way ANOVA (Analisis Varians Dua Arah) digunakan ketika kita ingin memeriksa pengaruh dua faktor yang independen terhadap variabel dependen. Dua faktor ini dapat berinteraksi satu sama lain, dan Two-Way ANOVA membantu untuk memahami apakah ada efek utama dari masing-masing faktor atau interaksi antara keduanya. 
+
+Contoh Kasus: Pengaruh Dosis Obat dan Jenis Kelamin Terhadap Penurunan Tekanan Darah 
+
+Misalkan kita ingin memeriksa pengaruh dua faktor, yaitu dosis obat (A: rendah, B: sedang, C: tinggi) dan jenis kelamin pasien (X: pria, Y: wanita) terhadap penurunan tekanan darah. 
+
+---
+
+## Repeated Measures ANOVA 
+
+
+---
+
+## Multivariate Analysis of Variance (MANOVA) 
+
+
+
+---
+
+## Analysis of Covariance (ANCOVA) 
+
+
+
+---
+
+## Mixed-Design ANOVA 
+
+
+---
+
+# PERSIAPAAN
+
+
+---
+
+## Package
+
+A
+
+---
+
+## Data set
+
+a
+
+---
+
+# Analysis case
+
+
+---
+
+## One-Way ANOVA
+a
+
+---
+
+## Two-Way ANOVA
+a
+
+---
+
+## Repeated Measures ANOVA 
+a
+
+---
+
+## Multivariate Analysis of Variance (MANOVA) 
+a
+
+---
+
+## Analysis of Covariance (ANCOVA) 
+a
+
+---
+
+## Mixed-Design ANOVA 
+a
+
+---
