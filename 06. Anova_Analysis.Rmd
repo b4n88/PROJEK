@@ -26,14 +26,9 @@ ANOVA memang fokus pada pemeriksaan perbedaan antara tiga atau lebih kelompok, t
 
 Perbedaan utama antara uji-t dan ANOVA terletak pada jumlah kelompok yang dianalisis. Uji-t digunakan ketika hanya ada dua kelompok yang dibandingkan, sementara ANOVA digunakan ketika ada tiga atau lebih kelompok. ANOVA dapat meminimalkan risiko kesalahan tipe I yang dapat terjadi jika Anda melakukan beberapa uji-t secara berulang kali pada set data yang sama. 
 
- 
-
 ANOVA umumnya digunakan ketika Anda memiliki lebih dari dua kelompok atau variabel bebas yang ingin Anda bandingkan. Ini bisa berupa satu variabel dependen yang diukur dalam berbagai kelompok atau dua atau lebih variabel independen yang berpotensi mempengaruhi variabel dependen. 
 
- 
-
 Jadi Anova di gunakan ketika data yang akan di analisa perbedaanya berjumlah 3 Variable. 
-
 
 ---
 
@@ -42,7 +37,7 @@ One-Way ANOVA digunakan ketika kita ingin membandingkan rata-rata dari tiga atau
 
 Contoh Kasus: Pengaruh Dosis Obat Terhadap Penurunan Tekanan Darah 
 
-Misalkan kita ingin menguji pengaruh dosis obat terhadap penurunan tekanan darah pada pasien. Kita memiliki tiga kelompok pasien yang menerima dosis obat yang berbeda: kelompok A (dosis rendah), kelompok B (dosis sedang), dan kelompok C (dosis tinggi). 
+Misalkan kita ingin menguji pengaruh dosis obat terhadap penurunan tekanan darah pada pasien. Kita memiliki tiga kelompok pasien yang menerima dosis obat yang berbeda: kelompok A (dosis rendah), kelompok B (dosis sedang), dan kelompok C (dosis tinggi). Untuk mengetahui jenis jenis Anova maka sebaiknya belajar dulu jenis data. Klik [di sini](https://rpubs.com/albani88/Dependen-dan-Independen)
 
 ---
 
@@ -57,23 +52,80 @@ Misalkan kita ingin memeriksa pengaruh dua faktor, yaitu dosis obat (A: rendah, 
 
 ## Repeated Measures ANOVA 
 
+Repeated Measures ANOVA (Analysis of Variance) adalah suatu metode statistik yang digunakan untuk menganalisis perbedaan rata-rata antara tiga atau lebih kelompok dalam situasi di mana subjek diukur lebih dari satu kali (dikenal sebagai "pengukuran berulang"). Ini sangat berguna ketika Anda ingin menguji perubahan dari waktu ke waktu atau efek dari suatu intervensi yang diukur pada berbagai waktu. 
+
+ 
+contoh yang lebih rinci dan konkret. Misalkan kita memiliki data hasil tes kognitif pada sekelompok siswa yang diukur pada tiga waktu yang berbeda: sebelum pembelajaran (pretest), setelah satu minggu pembelajaran (posttest1), dan setelah dua minggu pembelajaran (posttest2). Tujuan kita adalah untuk menentukan apakah ada perbedaan signifikan dalam rata-rata hasil tes kognitif pada ketiga waktu pengukuran. 
 
 ---
 
 ## Multivariate Analysis of Variance (MANOVA) 
 
+MANOVA menguji perbedaan rata-rata antara kelompok pada dua atau lebih variabel dependen yang saling terkait. Nah ini ada Dependen lagi. Masih ingetkan apa yang di maksud dengan Dependen. Yah benar sekali sample yang saling berhubungan. Klik [di sini](https://rpubs.com/albani88/Dependen-dan-Independen) untuk penjelasanya. 
 
+Contohnya adalah : Menganalisis apakah ada perbedaan yang signifikan dalam hasil tes kognitif, emosional, dan sosial antara tiga metode pengajaran (Metode X, Y, Z). 
 
 ---
 
 ## Analysis of Covariance (ANCOVA) 
 
+Analysis of Covariance (ANCOVA) adalah metode statistik yang digunakan untuk membandingkan rata-rata antara dua atau lebih kelompok, sambil mengontrol pengaruh variabel lain yang tidak diinginkan (covariate). Ini menggabungkan elemen analisis varians (ANOVA) dan analisis regresi. 
 
+Contohnya penggunaan Ancova Menganalisis apakah ada perbedaan signifikan dalam hasil tes antara kelompok kontrol dan kelompok perlakuan setelah mengontrol tingkat kecerdasan. 
+
+ANCOVA membantu kita untuk mengisolasi efek variabel kategorikal (kelompok) pada variabel dependen (hasil tes) setelah mengontrol atau mengkoreksi pengaruh variabel kovariat (tingkat kecerdasan). 
 
 ---
 
 ## Mixed-Design ANOVA 
 
+Mixed-Design ANOVA, atau disebut juga repeated-measures ANOVA, adalah metode statistik yang digunakan dalam analisis riset pasar untuk memahami efek perubahan pada variabel dependen sepanjang waktu atau dalam berbagai kondisi, sambil mempertimbangkan pengaruh faktor-faktor antar subjek (between-subjects) dan faktor-faktor dalam subjek (within-subjects). Dalam konteks riset pasar, mixed-design ANOVA dapat membantu memahami perubahan perilaku konsumen seiring waktu atau dalam situasi yang berbeda. 
+
+ 
+
+Nah loh,, kenapa di sebut repeated measures Anova? Bukanya di atas sudah di jelaskan? 
+
+ 
+
+Mixed-Design ANOVA dan Repeated-Measures ANOVA sebenarnya memiliki perbedaan, meskipun keduanya seringkali digunakan dalam konteks analisis statistik untuk data berulang atau dalam-subjek.  
+
+ 
+
+Analisis Antara Subjek: 
+
+Repeated-Measures ANOVA: Fokus utama pada analisis perubahan dalam subjek. 
+
+Mixed-Design ANOVA: Memiliki dimensi tambahan untuk mempertimbangkan efek antar subjek dan interaksi antara faktor antar dan dalam subjek. 
+
+Dengan kata lain, Repeated-Measures ANOVA adalah subset dari Mixed-Design ANOVA yang terbatas pada situasi di mana kita hanya memiliki faktor dalam subjek. Mixed-Design ANOVA memberikan fleksibilitas tambahan dengan memungkinkan kita memasukkan faktor antar subjek dan menilai interaksi antara faktor-faktor tersebut. 
+
+---
+
+# Asumsi yang harus di penuhi
+
+---
+
+Secara umum, semua jenis ANOVA (Analysis of Variance) memiliki beberapa asumsi yang serupa, tetapi ada beberapa perbedaan berdasarkan jenis ANOVA yang digunakan. Asumsi utama ANOVA termasuk normalitas, homogenitas varians, dan independensi. Namun, beberapa jenis ANOVA memiliki asumsi tambahan atau berbeda dalam penekanan pada beberapa asumsi tertentu. Berikut adalah gambaran umum:
+
+- Normalitas:
+
+Umum untuk Semua ANOVA: Data di setiap kelompok atau kondisi dianggap mengikuti distribusi normal. Asumsi ini penting untuk memastikan hasil analisis yang dapat diandalkan. ini sudah pernah saya bahas di [di sini]("https://rpubs.com/albani88/Normality_check").
+
+- Homogenitas Varians:
+
+Umum untuk Semua ANOVA: Varians dari data di setiap kelompok atau kondisi dianggap sekitar sama. Asumsi ini penting agar hasil analisis dapat diinterpretasikan dengan benar. 
+
+- Independensi:
+
+Umum untuk Semua ANOVA: Pengamatan di setiap kelompok atau kondisi harus independen satu sama lain. Ini mencakup independensi antara subjek atau unit pengamatan.
+
+- Linearitas (pada ANCOVA):
+
+Khusus untuk ANCOVA: Jika covariate (faktor antar subjek) digunakan, hubungannya dengan variabel dependen harus bersifat linier.
+
+- Sphericity (Khusus untuk Repeated-Measures ANOVA):
+
+Khusus untuk Repeated-Measures ANOVA: Sphericity mengacu pada homogenitas varians antar sel di dalam matriks kovarians pengukuran berulang. Diperlukan ketika ada pengukuran berulang pada subjek yang sama.
 
 ---
 
