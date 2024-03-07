@@ -151,7 +151,18 @@ library(httr)
 
 ## Data set
 
-Data set yang di gunakan mengambil dari Github
+Data set yang di gunakan mengambil dari Github [klik di sini](https://github.com/b4n88/PROJEK-Statistikadasar/blob/main/06.%20Anova_Analysis_Data_Set.xlsx)
+
+```{r}
+Data_one_way_anova = read_excel("C:/Users/Administrator/Downloads/06. Anova_Analysis_Data_Set.xlsx", sheet = "ONE WAY")
+
+```
+
+```{r}
+
+```
+
+
 
 ---
 
@@ -161,12 +172,78 @@ Data set yang di gunakan mengambil dari Github
 ---
 
 ## One-Way ANOVA
-a
+
+**Pengaruh Dosis Obat Penurun Tekanan Darah Terhadap Penurunan Tekanan Darah Pasien**
+
+### Pendahuluan
+
+Penelitian ini bertujuan untuk mengevaluasi pengaruh dosis obat penurun tekanan darah terhadap penurunan tekanan darah pada pasien. Penelitian ini menggunakan metode statistik One-Way ANOVA untuk membandingkan rata-rata penurunan tekanan darah antara tiga kelompok dosis obat yang berbeda.
+
+### Desain penelitian
+
+INGAT ANOVA DI GUNAKAN UNTUK MEMBANDINGKAN DATA BERBEDA (Independen)
+
+Variabel Independen:
+
+Dosis Obat (Faktor Tunggal)
+
+- Kelompok 1 (Dosis Rendah)
+- Kelompok 2 (Dosis Sedang)
+- Kelompok 3 (Dosis Tinggi)
+
+### Metode
+
+- Pengumpulan Data:
+
+Data penurunan tekanan darah dikumpulkan dari pasien yang menerima dosis obat berbeda.
+
+- Analisis Statistik:
+  
+Melakukan One-Way ANOVA untuk mengevaluasi apakah terdapat perbedaan signifikan antara rata-rata penurunan tekanan darah di tiga kelompok dosis obat.
+
+### Hasil
+
+```{r}
+# Melihat struktur data
+str(Data_one_way_anova)
+```
+```{r}
+# Melkukan One Way Anova
+one_way_anova = aov(Penurunan_Tekanan_Darah ~ Dosis, data = Data_one_way_anova)
+# Melihat hsil
+summary(one_way_anova)
+```
+
+
+
 
 ---
 
 ## Two-Way ANOVA
-a
+**Pengaruh Dosis Obat dan Jenis Kelamin terhadap Penurunan Tekanan Darah**
+
+Penelitian ini bertujuan untuk mengevaluasi pengaruh dua faktor, yaitu dosis obat (Dosis) dan jenis kelamin pasien (Jenis Kelamin), terhadap penurunan tekanan darah. Analisis ini menggunakan metode statistik Two-Way ANOVA untuk memahami apakah terdapat perbedaan signifikan dan interaksi antara kedua faktor tersebut.
+
+**Variabel Independen:**
+
+- Dosis Obat (Dosis)
+        
+    Dosis Rendah
+    Dosis Sedang
+    Dosis Tinggi
+
+- Jenis Kelamin (Jenis Kelamin)
+            
+    Pria
+    Wanita
+
+**Variabel Dependen:**
+
+- Penurunan Tekanan Darah
+
+Melakukan Two-Way ANOVA untuk menilai efek dosis obat, efek jenis kelamin, dan interaksi di antara keduanya terhadap penurunan tekanan darah. Data penurunan tekanan darah dikumpulkan dari pasien yang dibagi berdasarkan dosis obat yang diterima dan jenis kelamin. 
+
+
 
 ---
 
