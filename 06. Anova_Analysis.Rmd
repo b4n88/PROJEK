@@ -153,14 +153,7 @@ library(httr)
 
 Data set yang di gunakan mengambil dari Github [klik di sini](https://github.com/b4n88/PROJEK-Statistikadasar/blob/main/06.%20Anova_Analysis_Data_Set.xlsx)
 
-```{r}
-Data_one_way_anova = read_excel("C:/Users/Administrator/Downloads/06. Anova_Analysis_Data_Set.xlsx", sheet = "ONE WAY")
 
-```
-
-```{r}
-
-```
 
 
 
@@ -203,26 +196,21 @@ Melakukan One-Way ANOVA untuk mengevaluasi apakah terdapat perbedaan signifikan 
 
 ### Hasil
 
-```{r}
-# Melihat struktur data
-str(Data_one_way_anova)
-```
-```{r}
-# Melkukan One Way Anova
-one_way_anova = aov(Penurunan_Tekanan_Darah ~ Dosis, data = Data_one_way_anova)
-# Melihat hsil
-summary(one_way_anova)
-```
 
 
 
+*Catatan: Data set di atas hanya bersifat fiktif dan dibuat untuk tujuan demonstrasi. Anda dapat menggunakan data sebenarnya dari penelitian Anda untuk melakukan analisis Repeated Measures ANOVA.*
 
 ---
 
 ## Two-Way ANOVA
 **Pengaruh Dosis Obat dan Jenis Kelamin terhadap Penurunan Tekanan Darah**
 
+### Pendahuluan
+
 Penelitian ini bertujuan untuk mengevaluasi pengaruh dua faktor, yaitu dosis obat (Dosis) dan jenis kelamin pasien (Jenis Kelamin), terhadap penurunan tekanan darah. Analisis ini menggunakan metode statistik Two-Way ANOVA untuk memahami apakah terdapat perbedaan signifikan dan interaksi antara kedua faktor tersebut.
+
+### Desain
 
 **Variabel Independen:**
 
@@ -241,28 +229,110 @@ Penelitian ini bertujuan untuk mengevaluasi pengaruh dua faktor, yaitu dosis oba
 
 - Penurunan Tekanan Darah
 
+
+### Metode
+
 Melakukan Two-Way ANOVA untuk menilai efek dosis obat, efek jenis kelamin, dan interaksi di antara keduanya terhadap penurunan tekanan darah. Data penurunan tekanan darah dikumpulkan dari pasien yang dibagi berdasarkan dosis obat yang diterima dan jenis kelamin. 
 
+### Hasil
 
+```{r}
+
+```
+
+*Catatan: Data set di atas hanya bersifat fiktif dan dibuat untuk tujuan demonstrasi. Anda dapat menggunakan data sebenarnya dari penelitian Anda untuk melakukan analisis Repeated Measures ANOVA.*
 
 ---
 
 ## Repeated Measures ANOVA 
-a
+
+### Pendahuluan
+
+Penelitian ini bertujuan untuk mengevaluasi perubahan dalam hasil tes kognitif pada sekelompok siswa sebelum, selama, dan setelah periode pembelajaran. Metode analisis yang digunakan adalah Repeated Measures Analysis of Variance (ANOVA) untuk menilai apakah terdapat perbedaan signifikan dalam rata-rata hasil tes kognitif pada ketiga waktu pengukuran
+
+### Desain
+
+Penelitian ini menggunakan desain Repeated Measures, di mana setiap partisipan diukur pada ketiga waktu yang berbeda.
+
+### Model
+
+Analisis statistik Repeated Measures ANOVA dilakukan untuk menilai apakah terdapat perbedaan signifikan dalam hasil tes kognitif pada ketiga waktu pengukuran. 
+
+### Hasil
+
+```{r}
+
+```
+
+
+*Catatan: Data set di atas hanya bersifat fiktif dan dibuat untuk tujuan demonstrasi. Anda dapat menggunakan data sebenarnya dari penelitian Anda untuk melakukan analisis Repeated Measures ANOVA.*
 
 ---
 
 ## Multivariate Analysis of Variance (MANOVA) 
-a
+
+### Pendahuluan
+
+Penelitian ini bertujuan untuk mengevaluasi perbedaan rata-rata hasil tes kognitif dan hasil tes kreativitas pada sekelompok siswa pada dua kelompok kondisi pembelajaran yang berbeda. Analisis yang digunakan adalah Multivariate Analysis of Variance (MANOVA) untuk menilai apakah terdapat perbedaan signifikan dalam kombinasi variabel dependen.
+
+### Desain
+
+Penelitian ini menggunakan desain faktorial dengan dua faktor: kondisi pembelajaran dan waktu pengukuran. 
+
+Setiap partisipan diukur pada dua variabel dependen: hasil tes kognitif dan hasil tes kreativitas.
+
+### Model
+
+Analisis statistik MANOVA dilakukan untuk menilai apakah ada perbedaan signifikan antara kelompok kondisi pembelajaran, waktu pengukuran, dan interaksi antara keduanya. 
+
+### Hasil
+
+
+
+*Catatan: Data set di atas hanya bersifat fiktif dan dibuat untuk tujuan demonstrasi. Anda dapat menggunakan data sebenarnya dari penelitian Anda untuk melakukan analisis Repeated Measures ANOVA.*
 
 ---
 
 ## Analysis of Covariance (ANCOVA) 
-a
+
+### Pendahuluan
+
+Penelitian ini bertujuan untuk mengevaluasi perbedaan rata-rata hasil tes kognitif antara dua kelompok kondisi pembelajaran, dengan mempertimbangkan variabel kontrol berupa skor pretest sebagai covariate. Analisis yang digunakan adalah Analysis of Covariance (ANCOVA) untuk mengendalikan pengaruh variabel kontrol dan menentukan apakah perbedaan antara kelompok tetap signifikan.
+
+### Desain
+
+Penelitian ini menggunakan desain eksperimental dengan faktor kondisi pembelajaran (Kelompok) dan variabel kontrol (Pretest). Masing-masing partisipan diukur pada dua waktu yang berbeda: sebelum pembelajaran (pretest) dan setelah pembelajaran (posttest).
+
+### Model
+
+Analisis statistik ANCOVA dilakukan untuk menilai perbedaan rata-rata hasil tes kognitif antara kedua kelompok, dengan mengendalikan skor pretest sebagai covariate.
+
+### Hasil
+
+
+
+*Catatan: Data set di atas hanya bersifat fiktif dan dibuat untuk tujuan demonstrasi. Anda dapat menggunakan data sebenarnya dari penelitian Anda untuk melakukan analisis Repeated Measures ANOVA.*
 
 ---
 
 ## Mixed-Design ANOVA 
-a
+
+### Pendahuluan
+
+Penelitian ini bertujuan untuk mengevaluasi pengaruh dua faktor, yaitu jenis intervensi (Intervensi A dan Intervensi B) dan waktu pengukuran (pretest dan posttest), serta interaksi antara keduanya, terhadap hasil tes kognitif siswa. Analisis yang digunakan adalah Mixed-Design Analysis of Variance (ANOVA) untuk mengidentifikasi apakah ada perbedaan signifikan dalam hasil tes kognitif pada berbagai tingkatan waktu dan jenis intervensi.
+
+### Desain
+
+Penelitian ini menggunakan desain faktorial dengan dua faktor: jenis intervensi (Intervensi A dan Intervensi B) dan waktu pengukuran (pretest dan posttest). Masing-masing partisipan diukur pada dua waktu yang berbeda.
+
+### Model
+
+Analisis statistik Mixed-Design ANOVA dilakukan untuk mengevaluasi pengaruh jenis intervensi, waktu pengukuran, dan interaksi antara keduanya terhadap hasil tes kognitif. 
+
+### Hasil
+
+
+
+*Catatan: Data set di atas hanya bersifat fiktif dan dibuat untuk tujuan demonstrasi. Anda dapat menggunakan data sebenarnya dari penelitian Anda untuk melakukan analisis Repeated Measures ANOVA.*
 
 ---
