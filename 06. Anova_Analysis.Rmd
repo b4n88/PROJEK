@@ -144,6 +144,7 @@ library(readxl)
 library(tidyselect)
 library(dplyr)
 library(stats)
+library(agricolae)  # Uji post-hoc test 
 library(httr)
 ```
 
@@ -153,14 +154,68 @@ library(httr)
 
 Data set yang di gunakan mengambil dari Github [klik di sini](https://github.com/b4n88/PROJEK-Statistikadasar/blob/main/06.%20Anova_Analysis_Data_Set.xlsx)
 
+```{r}
+# Data untuk oneway anova
+oneway_anova_data = read_excel("C:/Users/Administrator/Downloads/06. Anova_Analysis_Data_Set(1).xlsx", sheet = "ONE WAY")
 
+# Data untuk twoway anova
+twoway_anova_data = read_excel("C:/Users/Administrator/Downloads/06. Anova_Analysis_Data_Set(1).xlsx", sheet = "TWO WAY")
 
+# Data untuk Repleated measure anova
+Repleated_measure_anova_data = read_excel("C:/Users/Administrator/Downloads/06. Anova_Analysis_Data_Set(1).xlsx", sheet = "Repeated Measures ANOVA ")
 
+# Data untuk Manova
+Manova_data = read_excel("C:/Users/Administrator/Downloads/06. Anova_Analysis_Data_Set(1).xlsx", sheet = "Manova")
+
+# Data untuk Analysis of covariancy
+Ancova= read_excel("C:/Users/Administrator/Downloads/06. Anova_Analysis_Data_Set(1).xlsx", sheet = "ANCOVA")
+
+# Data untuk Mixed design Anova
+Mixes_anove = read_excel("C:/Users/Administrator/Downloads/06. Anova_Analysis_Data_Set(1).xlsx", sheet = "Mixed-Design ANOVA")
+```
+Data di atas adalah sebagai berikut :
+
+```{r}
+str(oneway_anova_data)
+```
+
+```{r}
+str(twoway_anova_data)
+```
+
+```{r}
+str(Repleated_measure_anova_data)
+```
+
+```{r}
+str(Manova_data)
+```
+
+```{r}
+str(Ancova)
+```
+
+```{r}
+str(Mixes_anove)
+```
 
 ---
 
 # Analysis case
 
+## Pedoman Penting
+
+Penting untuk diingat bahwa hasil yang signifikan dalam uji ANOVA hanya memberi tahu Anda bahwa ada perbedaan di antara kelompok-kelompok tersebut, namun tidak memberikan informasi tentang kelompok mana yang berbeda secara signifikan. Oleh karena itu, jika Anda mendapatkan hasil yang signifikan dalam ANOVA, perlu dilakukan analisis lanjutan, seperti uji perbandingan kelompok (post-hoc test), untuk menentukan kelompok yang menyebabkan perbedaan tersebut.
+
+Bagaimana menentukan apakah nilai F-statistic besar atau kecil dapat relatif dan tergantung pada konteksnya. Beberapa pedoman umum adalah:
+
+    Jika nilai F-statistic lebih besar dari satu, dan p-value kecil (< 0.05): Ini dapat dianggap sebagai indikator adanya perbedaan yang signifikan antara kelompok.
+
+    Jika nilai F-statistic mendekati 1 atau p-value besar (> 0.05): Ini dapat menunjukkan bahwa perbedaan antara kelompok tidak signifikan.
+
+Namun, penting untuk selalu memperhitungkan konteks spesifik eksperimen atau analisis Anda. Terkadang, penilaian lebih lanjut seperti melihat distribusi data, ukuran sampel, dan pertimbangan praktis lainnya juga diperlukan untuk interpretasi yang akurat.
+
+Let's Goooooooooo 
 
 ---
 
@@ -196,8 +251,39 @@ Melakukan One-Way ANOVA untuk mengevaluasi apakah terdapat perbedaan signifikan 
 
 ### Hasil
 
+```{r}
+head(oneway_anova_data,5)
+```
 
 
+```{r}
+result_onewayanova = aov(Penurunan_Tekanan_Darah ~ Dosis, data = oneway_anova_data)
+summary(result_onewayanova)
+```
+
+Silahkan baca pedoman di subab di atas, karena F statsitic lebih besar dari 1 maka dapat dianggap sebagai indikator adanya perbedaan yang signifikan antara kelompok.
+
+### Uji Post Host test
+
+Post-hoc test digunakan setelah Anda mendapatkan hasil yang signifikan dalam analisis ANOVA dan ingin menentukan perbedaan khusus antara kelompok-kelompok tertentu. Beberapa post-hoc test yang umum digunakan termasuk Tukey's Honest Significant Difference (HSD), Bonferroni, dan lainnya.
+
+```{r}
+oneway_postgic_tukey = TukeyHSD(result_onewayanova, "Dosis", conf.level = 0.05)
+print(oneway_postgic_tukey)
+```
+    diff (Difference): Nilai ini menunjukkan perbedaan rata-rata antara dua kelompok dosis yang dibandingkan.
+
+    lwr (Lower Confidence Interval): Batas bawah dari interval kepercayaan 95% untuk perbedaan rata-rata.
+
+    upr (Upper Confidence Interval): Batas atas dari interval kepercayaan 95% untuk perbedaan rata-rata.
+
+    p adj (Adjusted p-value): Nilai p yang telah disesuaikan untuk mengendalikan tingkat kesalahan tipe I (family-wise error rate) dalam perbandingan multipel. Nilai ini menunjukkan seberapa signifikan perbedaan rata-rata antara dua kelompok dosis.
+
+Dalam kesimpulan umum:
+
+    Jika nilai "p adj" kurang dari tingkat signifikansi yang dipilih (biasanya 0.05), kita dapat menyimpulkan bahwa perbedaan rata-rata antara dua kelompok dosis tersebut adalah signifikan secara statistik.
+    
+    Perhatikan bahwa dalam kasus Anda, semua nilai "p adj" sangat kecil (0), menunjukkan bahwa perbedaan rata-rata antara setiap pasangan kelompok dosis adalah signifikan secara statistik.
 
 *Catatan: Data set di atas hanya bersifat fiktif dan dibuat untuk tujuan demonstrasi. Anda dapat menggunakan data sebenarnya dari penelitian Anda untuk melakukan analisis Repeated Measures ANOVA.*
 
@@ -237,14 +323,61 @@ Melakukan Two-Way ANOVA untuk menilai efek dosis obat, efek jenis kelamin, dan i
 ### Hasil
 
 ```{r}
-
+head(twoway_anova_data, 5)
 ```
+
+```{r}
+result_twowayanova = aov(Penurunan_Tekanan_Darah ~ Dosis * Jenis_Kelamin, data = twoway_anova_data)
+summary(result_twowayanova)
+```
+Kesimpulan:
+
+    Efek dosis, jenis kelamin, dan interaksi antara keduanya memiliki nilai p yang sangat kecil, menunjukkan bahwa mereka semua signifikan secara statistik.
+    Efek dosis memiliki F-statistic yang tinggi, menunjukkan adanya perbedaan yang signifikan antara dosis.
+    Efek jenis kelamin juga signifikan, meskipun dengan F-statistic yang lebih rendah.
+    Interaksi antara dosis dan jenis kelamin juga signifikan, menunjukkan bahwa efek dosis dapat bervariasi tergantung pada jenis kelamin.
+
+Namun, untuk menentukan perbedaan spesifik antar kelompok, Anda mungkin ingin melihat hasil post-hoc test seperti Tukey's HSD.
+
+### post-hoc test 
+
+```{r}
+print(result_twowayanova)
+```
+
+```{r}
+post_hoc_twowayanova = TukeyHSD(result_twowayanova, c("Dosis", "Jenis_Kelamin", "Dosis:Jenis_Kelamin"))
+print(post_hoc_twowayanova)
+```
+Dosis:
+
+    Perbedaan antara Dosis Sedang dan Dosis Rendah signifikan (p = 3.8e-06), dengan perbedaan sekitar 1.91.
+   
+    Perbedaan antara Dosis Tinggi dan Dosis Rendah juga signifikan (p = 0.0), dengan perbedaan sekitar 4.42.
+    
+    Perbedaan antara Dosis Tinggi dan Dosis Sedang signifikan (p = 0.0), dengan perbedaan sekitar 2.52.
+
+Jenis Kelamin:
+
+    Terdapat perbedaan signifikan antara wanita dan pria (p = 0.0219), dengan perbedaan sekitar 0.71.
+    
+Kesimpulan:
+
+- Terdapat perbedaan signifikan dalam penurunan tekanan darah antara setiap tingkat dosis.
+
+- Jenis kelamin juga memberikan dampak yang signifikan terhadap penurunan tekanan darah.
+
+- Terdapat interaksi yang signifikan antara dosis dan jenis kelamin, menunjukkan bahwa efek dosis dapat bervariasi tergantung pada jenis kelamin.
+
+- Dalam beberapa kasus, perbedaan signifikan juga terjadi antara dosis dan jenis kelamin spesifik. Misalnya, dosis tinggi pada wanita memiliki perbedaan yang signifikan dengan dosis tinggi pada pria, dosis rendah pada pria, dan dosis sedang pada pria.
 
 *Catatan: Data set di atas hanya bersifat fiktif dan dibuat untuk tujuan demonstrasi. Anda dapat menggunakan data sebenarnya dari penelitian Anda untuk melakukan analisis Repeated Measures ANOVA.*
 
 ---
 
 ## Repeated Measures ANOVA 
+
+**mengevaluasi perubahan dalam hasil tes kognitif pada sekelompok siswa sebelum, selama, dan setelah periode pembelajaran.** 
 
 ### Pendahuluan
 
@@ -261,9 +394,21 @@ Analisis statistik Repeated Measures ANOVA dilakukan untuk menilai apakah terdap
 ### Hasil
 
 ```{r}
+head(Repleated_measure_anova_data, 5)
+```
+```{r}
+result_Measure_anova = aov(cbind(Pretest, posttest1, posttest2) ~ 1 + Error(No), data = Repleated_measure_anova_data)
 
+summary(result_Measure_anova)
 ```
 
+Error: Within", yang menunjukkan analisis efek dalam (within-subject effects). Analisis ini memberikan informasi tentang variabilitas residu setelah pengaruh faktor-faktor yang diukur dalam analisis Repeated Measures ANOVA.
+
+Residuals: Df = 10 (jumlah subjek - 1), Sum Sq = 3857.9 (total sum of squares residu), Mean Sq = 385.79 (rata-rata kuadrat residu), F value = Tidak diberikan, dan Pr(>F) = Tidak diberikan. Ini memberikan informasi tentang variabilitas residu untuk variabel Pretest setelah pengaruh semua faktor yang diukur dalam analisis.
+
+Proses ini diulangi untuk variabel Response posttest1 dan posttest2, memberikan informasi yang serupa tetapi terkait dengan variabel respons tersebut.
+
+Ringkasan ini memberikan pandangan awal tentang signifikansi statistik dari efek dalam dan efek antara (antara subjek) dalam analisis Repeated Measures ANOVA untuk setiap variabel respons yang diukur. Nilai-nilai F dan nilai p (Pr(>F)) digunakan untuk menilai signifikansi statistik dari efek-efek ini.
 
 *Catatan: Data set di atas hanya bersifat fiktif dan dibuat untuk tujuan demonstrasi. Anda dapat menggunakan data sebenarnya dari penelitian Anda untuk melakukan analisis Repeated Measures ANOVA.*
 
@@ -287,7 +432,18 @@ Analisis statistik MANOVA dilakukan untuk menilai apakah ada perbedaan signifika
 
 ### Hasil
 
+```{r}
+head(Manova_data, 5)
+```
 
+```{r}
+result_manova = manova(cbind(TesKognitif, TesKreativitas) ~ Kelompok * Waktu, data = Manova_data)
+summary(result_manova)
+```
+
+`Pillai` Ini adalah nilai statistik Pillai's Trace, yang menunjukkan seberapa besar efek faktor "Kelompok" dalam menjelaskan variasi dalam variabel respons (TesKognitif dan TesKreativitas). Nilai ini berkisar antara 0 dan 1, dan semakin mendekati 1, semakin besar efeknya.
+
+hasil menunjukkan bahwa faktor "Kelompok" tidak memiliki efek signifikan terhadap TesKognitif dan TesKreativitas, berdasarkan nilai p yang tinggi. Perlu diingat bahwa interpretasi lebih lanjut dapat bergantung pada konteks eksperimen dan pengetahuan domain spesifik.
 
 *Catatan: Data set di atas hanya bersifat fiktif dan dibuat untuk tujuan demonstrasi. Anda dapat menggunakan data sebenarnya dari penelitian Anda untuk melakukan analisis Repeated Measures ANOVA.*
 
@@ -309,7 +465,15 @@ Analisis statistik ANCOVA dilakukan untuk menilai perbedaan rata-rata hasil tes 
 
 ### Hasil
 
+```{r}
+head(Ancova, 5)
+```
+```{r}
+result_Ancova = aov(Posttest ~ Kelompok + Pretest, data = Ancova)
+summary(result_Ancova)
+```
 
+Berdasarkan hasil ini, dapat disimpulkan bahwa baik variabel kelompok maupun kovariat Pretest memiliki efek yang signifikan pada variabel Posttest. Hal ini dapat bermanfaat dalam memahami pengaruh faktor kelompok dan kovariat dalam menjelaskan variasi dalam hasil Posttest.
 
 *Catatan: Data set di atas hanya bersifat fiktif dan dibuat untuk tujuan demonstrasi. Anda dapat menggunakan data sebenarnya dari penelitian Anda untuk melakukan analisis Repeated Measures ANOVA.*
 
@@ -331,7 +495,40 @@ Analisis statistik Mixed-Design ANOVA dilakukan untuk mengevaluasi pengaruh jeni
 
 ### Hasil
 
+sintaks di bawah ini mencoba untuk memahami bagaimana intervensi atau perlakuan (dengan JenisIntervensi) dan waktu pengukuran (Waktu) mempengaruhi variabel TesKognitif. Model ini juga memperhitungkan efek acak individu pada variabel Waktu, menunjukkan bahwa ada variasi antar individu yang mungkin perlu diperhitungkan
 
+```{r}
+result_mixed_anova <- aov(TesKognitif ~ JenisIntervensi * Waktu + Error(ID/Waktu), data = Mixes_anove)
+summary(result_mixed_anova)
+```
+
+Ringkasan hasil ANOVA campuran yang diberikan menunjukkan informasi tentang pengaruh variabel JenisIntervensi, Waktu, serta interaksi antara keduanya terhadap variabel TesKognitif. Berikut adalah interpretasi hasilnya:
+
+- Error: ID (Variabilitas antar Individu):
+
+JenisIntervensi: Terdapat variasi yang signifikan dalam TesKognitif antar individu (ID). Hal ini dilihat dari nilai F-ratio yang signifikan (42.719) dengan nilai p yang sangat rendah (1.75e-07 atau 0.000000175), ditandai dengan tanda tiga bintang (***). Oleh karena itu, ada bukti yang kuat bahwa terdapat perbedaan signifikan dalam TesKognitif antar individu berdasarkan JenisIntervensi.
+
+- Error: ID:Waktu (Variabilitas antar Individu terhadap Waktu):
+
+Waktu: Terdapat variasi yang signifikan dalam TesKognitif antar individu untuk perubahan waktu. Meskipun nilai F-ratio (0.013) cukup rendah dan nilai p (0.909) sangat tinggi, ini menunjukkan bahwa variabilitas TesKognitif terkait dengan individu, meskipun tidak signifikan secara statistik terhadap Waktu.
+
+- Error: Within (Variabilitas dalam Individu):
+
+JenisIntervensi: Terdapat variasi yang signifikan dalam TesKognitif antar individu dalam kelompok yang sama. Hal ini dilihat dari nilai F-ratio yang signifikan (42.719) dengan nilai p yang sangat rendah (1.75e-07), ditandai dengan tanda tiga bintang (***). Oleh karena itu, ada bukti yang kuat bahwa terdapat perbedaan signifikan dalam TesKognitif antar individu berdasarkan JenisIntervensi.
+
+Waktu: Tidak ada variasi yang signifikan dalam TesKognitif antar individu untuk perubahan waktu. Nilai p yang tinggi (0.909) menunjukkan bahwa efek Waktu tidak signifikan terhadap TesKognitif antar individu.
+
+JenisIntervensi:Waktu: Tidak ada variasi yang signifikan dalam TesKognitif antar individu untuk interaksi antara JenisIntervensi dan Waktu. Nilai p yang tinggi (0.950) menunjukkan bahwa efek interaksi antara JenisIntervensi dan Waktu tidak signifikan terhadap TesKognitif antar individu.
+
+Residuals: Sisa atau variabilitas yang tidak dapat dijelaskan oleh variabel-variabel yang dimasukkan ke dalam model.
+
+Signif. codes:
+
+    ***: Signifikansi pada tingkat 0.001.
+    **: Signifikansi pada tingkat 0.01.
+    *: Signifikansi pada tingkat 0.05.
+    .: Signifikansi pada tingkat 0.1.
+    1: Tidak signifikan.
 
 *Catatan: Data set di atas hanya bersifat fiktif dan dibuat untuk tujuan demonstrasi. Anda dapat menggunakan data sebenarnya dari penelitian Anda untuk melakukan analisis Repeated Measures ANOVA.*
 
