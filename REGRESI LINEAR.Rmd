@@ -1,0 +1,286 @@
+---
+title: "Regresi Linear"
+author: "Albani"
+date: "2024-03-17"
+output: 
+  html_document:
+    theme: cerulean
+    code_folding: show
+    code_download: yes
+    lightbox: true
+    toc: yes
+    toc_float:
+      collapsed: true
+---
+
+# Regresi Linear
+
+```{r, echo=FALSE,warning=FALSE}
+knitr::include_graphics("C:/Users/Administrator/Downloads/linear-regression.png")
+```
+
+**Mari kita mencoba memahami materi ini dengan beberapa pertanyaan**
+
+## Pendahuluan
+
+- Apasih regresi itu? 
+
+Regresi adalah metode yang digunakan untuk memahami dan memodelkan hubungan antara satu atau lebih variabel independen (variabel prediktor) dan satu variabel dependen (variabel respons).  
+
+- Kapan Regresi itu di temukan? 
+
+*"Eh buset nanya udah kek pertanyaan ayang selingkuh apa nggak,, klao bisa nanya yang penting penting aja dah kwkkwk.."*
+
+- Bisa kasih contoh Regresi dalam kehidupan sehari hari?
+
+*"oke ini cukup ber bobot"*
+
+Contohnya adalah ketika kita ingin memodelkan apakah semakin `tinggi duid jajan` semaakin tinggi pula `kasih sayang`?
+
+Nah ini contoh aja sih ya kwkwk yang jomblo harap bersabar.
+
+- Kapan Regresi itu di gunakan?
+
+Regresi ini jenisnya ada beberapa dan digunakan ketika variable nya berbeda,,
+
+---
+
+## Jenis Jenis Regresi dan COntohnya
+
+Pada materi ini kita akan fokus di 3 jenis yaitu `Regresi Liniar Sederhana`, `Regresi Liniar Berganda` dan `Regresi Logistik`
+
+### Regresi Liniar Sederhana
+
+```{r, echo=FALSE, warning=FALSE}
+knitr::include_graphics("C:/Users/Administrator/Downloads/Gambar-51-Analisis-regresi-linier-sederhana-berdasarkan-data-penelitian-Wibowo-2013.png")
+```
+
+Dalam regresi linear sederhana, terdapat satu variabel independen dan satu variabel dependen. Model regresi linear sederhana diwakili oleh persamaan garis lurus (linear), seperti
+
+`y=mx+c`
+
+y=mx+c, di mana y adalah variabel dependen, x adalah variabel independen, m adalah koefisien kemiringan, dan c adalah intercept. 
+
+Contohnya adalah : 
+
+- Misalkan kita bekerja di sebuah perusahaan dan ingin memahami hubungan antara biaya iklan yang dihabiskan dalam suatu periode dengan jumlah penjualan produk Anda.  
+
+- Kita ingin melihat hubungan antara budget film MCU mempengaruhi dan mengakibatkan box_office secara positif dan kuat 
+
+- Ingin memprediksi Qty penjualan dari kenaikan harga. Apakah semakin tinggi harganya maka akan semakin sedikit yang beli? 
+
+### Regresi Liniar Berganda
+
+```{r, echo=FALSE, warning=FALSE}
+knitr::include_graphics("C:/Users/Administrator/Downloads/multiple-regression-in-r-graph-1.webp")
+```
+
+Regresi linear berganda adalah jenis analisis regresi yang melibatkan lebih dari satu variabel independen untuk memprediksi variabel dependen. Dalam regresi linear berganda, kita mencoba memodelkan hubungan antara satu variabel dependen dengan dua atau lebih variabel independen. Model regresi linear berganda umumnya diwakili oleh persamaan berikut: 
+
+y=b0+b1x1+b2x2+…+bnxn+𝜀
+
+y=b0 +b1 x1 +b2 x2 +…+bn xn +ε 
+
+Contohnya :  
+
+- Sebuah perusahaan minuman ingin memahami faktor-faktor apa yang mempengaruhi penjualan produk mereka di pasar tertentu. Mereka memiliki data penjualan (variabel dependen), harga produk, promosi iklan, dan cuaca (variabel independen). 
+
+- Perusahaan menggunakan regresi linear berganda untuk memodelkan hubungan antara penjualan produk dengan harga, promosi iklan, dan cuaca.  
+
+- Seorang peneliti ingin memahami faktor-faktor yang mempengaruhi tekanan darah seseorang. Dia memiliki data tekanan darah (variabel dependen), tingkat aktivitas fisik, pola makan, dan usia (variabel independen). 
+
+- Peneliti menggunakan regresi linear berganda untuk memodelkan hubungan antara tekanan darah dengan tingkat aktivitas fisik, pola makan, dan usia.  
+
+
+***Penting : Regresi linear sederhana vs berganda di bedakan dari jumalh variablenya***.
+
+
+### Regresi Logistik
+
+```{r, echo=FALSE, warning=FALSE}
+knitr::include_graphics("C:/Users/Administrator/Downloads/S-curve.36de3c694cafe97ef4e391ed26a5cb0b357f6316.png")
+```
+
+Regresi logistik adalah metode statistik yang digunakan untuk memodelkan hubungan antara satu atau lebih variabel independen (prediktor) dengan variabel dependen biner (dichotomous), yang memiliki dua kategori atau hasil. Tujuannya adalah untuk memprediksi probabilitas kejadian suatu kejadian tertentu (biasanya diwakili oleh kategori 1) berdasarkan nilai-nilai variabel independen. Regresi logistik adalah alat yang umum digunakan dalam analisis data di berbagai bidang, termasuk ilmu sosial, kedokteran, epidemiologi, dan bisnis. 
+
+Contoh penerapan regresi logistik termasuk prediksi probabilitas seseorang mengembangkan penyakit tertentu berdasarkan faktor-faktor risiko seperti usia, jenis kelamin, dan riwayat merokok; atau memprediksi probabilitas pelanggan membeli produk tertentu berdasarkan karakteristik demografis mereka dan perilaku pembelian sebelumnya. (stroke prediction) 
+
+### Regresi NonLinear
+
+Regresi non-linear adalah jenis analisis regresi di mana hubungan antara variabel independen dan variabel dependen tidak dapat dijelaskan dengan persamaan garis lurus. Sebaliknya, hubungan tersebut dijelaskan dengan fungsi matematika yang lebih kompleks, seperti polinomial, eksponensial, logaritmik, sigmoid, atau fungsi lainnya yang tidak linear. 
+
+Contoh: Prediksi Pertumbuhan Pengguna Aplikasi Seluler 
+
+Deskripsi Kasus: Sebuah perusahaan pengembang aplikasi seluler ingin memprediksi pertumbuhan pengguna aplikasi mereka seiring dengan waktu. Mereka memiliki data historis tentang jumlah pengguna aktif harian (variabel dependen) selama beberapa bulan. 
+
+Model Regresi Non-linear: Perusahaan menggunakan regresi non-linear untuk memodelkan pertumbuhan pengguna aplikasi. Mereka memilih model pertumbuhan logistik yang umum digunakan dalam kasus seperti ini. 
+
+Interpretasi: Dengan menggunakan model regresi non-linear logistik, perusahaan dapat memprediksi pertumbuhan pengguna aplikasi mereka seiring waktu. Mereka dapat memperkirakan puncak pertumbuhan (L), laju pertumbuhan (k), dan titik tengah pertumbuhan (t0). Informasi ini dapat membantu perusahaan untuk mengatur strategi pemasaran, alokasi sumber daya, dan pengambilan keputusan bisnis lainnya. 
+
+***ini tidak akan di bahas kembalike topik sayang kuh, kita akan bahas 3 jenis Regresi saja***
+
+### Regresi Time Series 
+
+Regresi time series adalah teknik analisis yang digunakan untuk memodelkan hubungan antara satu atau lebih variabel dengan waktu (variabel independen) dan variabel yang diamati sepanjang periode waktu tertentu (variabel dependen). Tujuannya adalah untuk memahami dan memprediksi perilaku atau tren dari data time series berdasarkan informasi waktu sebelumnya. 
+
+***Ini akan di bahas dalam materi time series analysis***. 
+
+### Regresi Ridge dan Lasso 
+
+Regresi Ridge dan Lasso adalah dua metode regularisasi yang digunakan dalam regresi linear untuk mengatasi masalah overfitting dan meningkatkan kinerja model dengan mengontrol kompleksitasnya. 
+
+***ini tidak akan di bahas kembalike topik sayang kuh, kita akan bahas 3 jenis Regresi saja***
+
+---
+
+## Asumsi Regresi
+
+Asumsi Regresi adalah paramater yang harus kita lalui untuk  mengukur sebaikmana Regresi kita dan apakah model kita sudah cukup memuaskan? 
+
+jalur ini harus di pastikan memnuhi asumsi agar model kita??
+
+Yesss, Model kita baik. sebaik akhlak Rasul.
+
+### Goodness of fit dari model 
+
+Parameter `Goodness of fit` dari model berupa:  
+
+#### R-Squared 
+
+- R-Squared adalah ukuran statistik yang menggambarkan seberapa baik model regresi linear cocok dengan data yang diamati. 
+
+- Nilai R-Squared berkisar antara 0 hingga 1, di mana semakin tinggi nilainya, semakin baik modelnya. 
+
+- R-Squared mengukur seberapa besar variasi dalam variabel dependen yang dapat dijelaskan oleh variabel independen dalam model. Dengan kata lain, R-Squared menunjukkan persentase variasi dalam variabel dependen yang dapat dijelaskan oleh model regresi. Misalnya, jika R-Squared adalah 0,5, ini berarti 50% dari variasi dalam variabel dependen dapat dijelaskan oleh model. 
+
+- Namun, penting untuk diingat bahwa R-Squared tidak menunjukkan sebab dan akibat, dan nilainya bisa meningkat hanya karena menambahkan variabel independen, bahkan jika variabel tersebut tidak memiliki hubungan kausal dengan variabel dependen. 
+
+
+#### P-value 
+
+- P-value adalah ukuran yang digunakan untuk menentukan signifikansi statistik dari koefisien dalam model regresi atau efek variabel independen terhadap variabel dependen. 
+
+- Nilai P-value menunjukkan probabilitas bahwa koefisien nol atau tidak ada efek. 
+
+- Secara umum, jika P-value kurang dari nilai alpha yang telah ditetapkan (biasanya 0,05), maka koefisien dianggap signifikan secara statistik dan kita dapat menolak hipotesis nol (hipotesis bahwa koefisien adalah nol). 
+
+- Jika P-value lebih besar dari nilai alpha, maka koefisien dianggap tidak signifikan secara statistik, yang berarti kita gagal menolak hipotesis nol. 
+
+- Dalam konteks goodness of fit, P-value juga dapat digunakan untuk menilai signifikansi keseluruhan model. Sebuah P-value yang kecil menunjukkan bahwa model secara keseluruhan signifikan secara statistik. 
+
+#### Mean Squared Error (MSE) 
+
+- Mean Squared Error (MSE) adalah ukuran statistik yang mengukur rata-rata dari kuadrat perbedaan antara nilai yang diprediksi oleh model regresi dan nilai yang diamati dari variabel dependen. 
+
+- MSE digunakan untuk mengevaluasi seberapa baik model regresi memperkirakan nilai yang sebenarnya. Semakin kecil nilai MSE, semakin baik modelnya. 
+
+- Dalam beberapa kasus, akar kuadrat dari MSE (Root Mean Squared Error, RMSE) sering digunakan sebagai ukuran yang lebih intuitif karena memiliki unit yang sama dengan variabel dependen. 
+
+
+Cara liatnya bisa dengan `summary(nama model regresi)`. 
+
+### Normality of Residual 
+
+Mengecek apakah erornya berdistribusi normal? 
+
+Uji hipotesisnya adalah : 
+
+H0 : residual berdistribusi normal. 
+
+H1 : residual tidak berdistribusi normal 
+
+Jika P value < 0.05 tolak H0 (uji dengan shapiro atau kolmogorov) kapan menggunakan salah satu dari kedua uji ini? tergantung dari jumlah n atau sample uji, <50 gunakan shapiro dan >50 gunakan kolmogorov sudah saya bahas [di sini](https://rpubs.com/albani88/Normality_check)
+
+Asumsi Ini harus normal ya, kenapa? 
+
+Asumsi distribusi normal dari residual penting karena memungkinkan kita untuk melakukan inferensi statistik yang akurat, seperti menghitung interval kepercayaan dan melakukan pengujian hipotesis. Ketika residual berdistribusi normal, kita dapat yakin bahwa estimasi koefisien dan statistik inferensial lainnya beroperasi dengan benar. 
+
+### Linearity Check 
+
+cek linearity dengan plot dengan sintaksmelihat plot residual dan fitted values dari model 
+ 
+`plot(model,1)`
+
+Uji hipotesis: 
+
+`H0` : Tidak linear 
+
+`H1` : Linear 
+
+Jika `P value` `< 0.05`, tolak H0 
+
+Uji korelasi menggunakan `cor.test()` untuk variabel prediktor 
+
+Asumsinya atau hasil dari Uji korelasi harus baik, meskipun idealnya kita ingin hubungan antara variabel dalam model regresi bersifat linear, adanya sedikit ketidaklinieran tidak selalu membuat model tersebut buruk. Penting untuk mempertimbangkan konteks analisis, tujuan, dan keterbatasan data ketika mengevaluasi linearitas dalam model regresi.
+
+### Uji Homoscedascity 
+
+Apa maksud dari homoscedasticity? Artinya error tidak memiliki pola. Sedangkan jika heteroscedasticity artinya error-nya berpola. Kalau terdapat heteroscedasticity, kemungkinan ada outlier yang harus dibuang. 
+
+Uji hipotesis: 
+
+H0 : model homoscedasticity 
+
+H1 : model heteroscedasticity 
+
+Jika P value < 0.05, tolak H0 
+
+ 
+
+Uji statistiknya dengan function `bptest()` dari `library(lmtest)`. 
+
+`Bptest(model)`
+
+Kenapa uji ini harus di lakukan? Masih bingung euy,, 
+
+Oke gan.. Jadi gini bayang kan jika residualny amemiliki pola, artinya baraible erornya punya pola linearitas. Nah kan artinya residual kita malah jadi prediktor yang baru kan? Lalu apa gunanya model kita sebelumnya?  nah kebayang ngga? That’s why Eror atau Residual harus homosedasicity. 
+
+### Uji Multicollinearity 
+
+Nah, uji yang ini baru bisa akan kita lakukan jika kita melakukan `multiple linear regression`, yakni saat variabel prediktornya lebih dari satu. Kita tidak mau kalau variabel prediktor di model kita itu saling berpengaruh (dependen) oh iya bahas tentang Dependen dan Independen variable sudah pernah saya tulis [Di sini](https://rpubs.com/albani88/Dependen-dan-Independen). 
+
+Untuk melakukannya, kita perlu mengujinya menggunakan nilai vif. 
+
+Cek dengan fungsi `vif()` dari `library(car)` untuk mengetahui variabel-variabel mana yang tidak bisa ditoleransi menjadi sebuah prediktor. 
+
+  `vif(model)` 
+
+Nilai vif yang baik harus `< 10` ketika vif `> 10` maka harus ada variable yang di eliminasi atau di lakukan feature engineering (membuat variabel baru dari variabel-variabel yang ada). 
+
+Sebentarrrrrr 
+
+Ini saya bingung say,, maksud dari Multicolinearitas bagaimana?? 
+
+Argghhhhhhh 
+
+Nah maksud dari Multicolinearitas adalah variable variable saling bertannga korelasi. Contoh variable A berkorelsi dengan B, B dengan C, A dengan C. nah bingungkan? Makanya Model juga jadi bingung mau ngebaca gimana ini prediksi. Kwkwkkwk 
+
+Masih gak ngarti juga? klik [di sini](https://rpubs.com/albani88/Multikoliniaritas) untuk study casenya ya saya sudah tulis materinya secara terpisah.
+
+### Penting
+
+    **Jika model linear yang kita buat ternyata lolos semua `uji asumsi`, maka model tersebut cukup baik. Kita tinggal menimbang angka-angka parameter goodness of fit dari model untuk menentukan apakah model ini sudah cukup baik dalam membuat prediksi.**
+
+---
+
+# Study case
+
+Study case ini akan kita ambil contoh dari kehidupan sehari hari. data set di ambil [dari sini]()
+
+## Regresi Linear Sederhana
+
+
+
+## Regresi Liniar Berganda
+
+
+
+## Regresi Logistik
+
+
+
+
+---
+
+
+
