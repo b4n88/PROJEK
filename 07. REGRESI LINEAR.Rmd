@@ -267,9 +267,39 @@ Masih gak ngarti juga? klik [di sini](https://rpubs.com/albani88/Multikoliniarit
 
 Study case ini akan kita ambil contoh dari kehidupan sehari hari. data set di ambil [dari sini]()
 
+Package yang di gunakan adalah :
+
+```{r}
+library(readxl)
+library(stats)
+library(tidyverse)
+library(dplyr)
+library(car)
+library(lmtest)
+library(MASS)
+library(ggplot2)
+library(lmtest)
+library(broom)
+```
+
+
+
 ## Regresi Linear Sederhana
 
+Laporan Analisis Regresi Linear Sederhana: **Pengaruh Jumlah Jam Belajar Terhadap Nilai Ujian**
 
+### Pendahuluan
+
+Regresi linear sederhana adalah teknik statistik yang digunakan untuk memahami hubungan antara satu variabel independen dengan satu variabel dependen. Dalam laporan ini, kami akan menganalisis apakah ada hubungan antara jumlah jam belajar dengan nilai ujian mahasiswa. Variabel independen dalam analisis ini adalah jumlah jam belajar (X), sedangkan variabel dependen adalah nilai ujian (Y).
+
+### Data set
+
+
+
+
+
+
+---
 
 ## Regresi Liniar Berganda
 
