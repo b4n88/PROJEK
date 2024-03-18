@@ -269,8 +269,9 @@ Study case ini akan kita ambil contoh dari kehidupan sehari hari. data set di am
 
 Package yang di gunakan adalah :
 
-```{r}
+```{r, warning=FALSE}
 library(readxl)
+library(readr)
 library(stats)
 library(tidyverse)
 library(dplyr)
@@ -280,9 +281,10 @@ library(MASS)
 library(ggplot2)
 library(lmtest)
 library(broom)
+library(MLmetrics)
 ```
 
-
+---
 
 ## Regresi Linear Sederhana
 
@@ -294,18 +296,206 @@ Regresi linear sederhana adalah teknik statistik yang digunakan untuk memahami h
 
 ### Data set
 
+```{r}
+#membuat contoh data set
+set.seed(123)
+Jambelajar= round(runif(50, min = 5, max = 20))
+Nilai = round(Jambelajar*2+rnorm(50, mean = 0, sd = 1))
+data_regresi = data.frame(Jambelajar, Nilai)
+str(data_regresi)
+```
+
+### Model
+
+```{r}
+Model_regsed = lm(Nilai~Jambelajar, data = data_regresi)
+summary(Model_regsed)
+```
+dari hasil summary di atas menunjukan bahwa `B0` = Intercept, dan `B1`=jambelajar artinya dapat kita bentuk model persamaan sebagai berikut :
+
+**Nilai = 0.37+1.97*`Jambelajar`**
+
+```{r}
+ggplot(data_regresi, aes(x = Jambelajar, y= Nilai))+
+         geom_point()+
+         geom_smooth(method = "lm", se = FALSE, color = "red")+
+         labs(x = "Jam Belajar", y = "Nilai")+
+  theme_minimal()+
+  theme(plot.background = element_rect(fill = "lightblue") )+
+  theme(plot.title = element_text(hjust = 0.5))+
+        ggtitle("Scatter Plot with Linear Regression Line")
+```
+
+dari plot di atas ngeri kali regresinya kek benar. mari kita buktikan.
+
+### Asumsi Model
+apakah model kita sudah bagus???
+
+```{r}
+summary(Model_regsed)
+```
+
+#### Goodness of fit dari model 
+
+- R-Square
+
+0.989 ini adalah angka yang fantastis, sangat ngeri regresinya sangat kuat.
+
+- P-Value
+
+2.2 artinya > 0.05, maka bisa kita asumsikan bahwa model kita cukup signifikan.
+
+- MSE
+
+```{r}
+MSE(Model_regsed$fitted.values, data_regresi$Nilai)
+```
+
+Nilainya cukup fantastis, mendekati angka 0, sehingga bisa di pastikan data kita akurat.
+
+#### Normality of redusial
+
+```{r}
+hist(Model_regsed$residuals)
+```
+
+Sekarang saya lakukan uji kenormalan dengan uji shapiro.test():
+
+```{r}
+shapiro.test(Model_regsed$residuals)
+```
+Residual dari model regresi linear berdistribusi normal. nilai p value > 0.05.
+
+kenapa pakai Shapiro?? yes benar karna  sampelnya hanya 50. kalau lebih dari 50 maka? ya menggunakan kolmogorof.
+
+```{r}
+# pakai ini kalau sample > 50
+ks.test(Model_regsed$residuals, "pnorm", mean = mean(Model_regsed$residuals), sd =sd(Model_regsed$residuals))
+```
+itu ada warningnya,, kwkkwk tidak untuk Kolmogorov kwkwkkw
+
+#### Liniarity cek
+
+```{r}
+plot(Model_regsed)
+```
+
+Plot 1 di atas terlihat bentuk dari liniearitasnya.
+
+kita gunakan uji korelasi untuk cek.
+
+```{r}
+cor.test(data_regresi$Jambelajar, data_regresi$Nilai)
+```
+
+    hipotesis 1 di terima, artinya uji liniarity lolos uji.. yeyyyyy
+
+#### homoscedacity
+
+Apa maksud dari homoscedasticity? Artinya error tidak memiliki pola. Sedangkan jika heteroscedasticity artinya error-nya berpola. Kalau terdapat heteroscedasticity, kemungkinan ada outlier yang harus dibuang.
+
+Plot error dan nilai aktualnya:
+
+```{r}
+plot(Model_regsed$residuals, data_regresi$Nilai)
+```
+Uji statistiknya dengan function bptest() dari library(lmtest).
+
+```{r}
+bptest(Model_regsed)
+```
+H0 di terima :
+Kesimpulan:
+
+    Lolos uji homoscedasticity!
 
 
+#### Multicoloniarity
+
+```{r}
+#multico = vif(Model_regsed)
+```
+
+eror tuh nah loh, gimna dah itu, karena ini menggunakan Regresi linier sederhana, maka uji multikolinearits ga perlu di uji gaes.. why? ya kan hanya ada 1 varaible dependen dan Independen. jadi VIP di gunakan ketika data lebih dari 3 variable yak..
 
 
+#### FINAL
+
+Karena smua uji berhasil di lewati dengan baik, maka model kita siap di gunakangaes.. akowkaowkaow 
 
 ---
 
 ## Regresi Liniar Berganda
 
+Contoh study case adalah tentang :
 
+### Dataset
+
+
+### Model
+
+
+### Asumsi Model
+apakah model kita sudah bagus???
+
+#### Goodness of fit dari model 
+
+- R-Square
+
+
+- P-Value
+
+
+- MSE
+
+
+#### Normality of redusial
+
+
+#### Liniarity cek
+
+
+#### homoscedacity
+
+
+#### Multicoloniarity
+
+---
 
 ## Regresi Logistik
+
+Contoh study case adalah tentang :
+
+### Dataset
+
+
+### Model
+
+
+### Asumsi Model
+apakah model kita sudah bagus???
+
+#### Goodness of fit dari model 
+
+- R-Square
+
+
+- P-Value
+
+
+- MSE
+
+
+#### Normality of redusial
+
+
+#### Liniarity cek
+
+
+#### homoscedacity
+
+
+#### Multicoloniarity
 
 
 
