@@ -183,4 +183,20 @@ knitr::include_graphics("C:/Users/Administrator/Downloads/roc plot.png")
 
 # Penutup
 
+Selanjutnya jika model sudah baik asumasi terpenuhi. maka model itu bisa kita jadikan sebagai alat prediksi, dengan menggunakan data set baru yang berisi variable yang sama dengan data set model. caranya adalah :
+
+```{r}
+#membuat prediksi dengan data baru dari model
+predicted_values <- predict(model_reglog, newdata = new_data)
+
+# Evaluasi model
+residuals <- true_values - predicted_values
+mse <- mean(residuals^2)
+
+# Plot model
+plot(new_data$X1, predicted_values, col = "red", pch = 16, xlab = "X1", ylab = "Predicted Y", main = "Model Regression Plot")
+points(new_data$X1, true_values, col = "blue", pch = 16)
+legend("topleft", legend = c("Predicted Values", "True Values"), col = c("red", "blue"), pch = 16)
+
+```
 
