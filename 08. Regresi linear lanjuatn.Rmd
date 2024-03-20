@@ -17,6 +17,8 @@ output:
 
 Kemarin saya sudah menuliskan tentang dasar-dasar regresi namun hanya 3 materi saja, yaitu : `Regresi linear sederhana`, `Regresi linear berganda` & `Regresi logistik`. Materi ini akan saya coba jelaskan yang saya tau lebih dulu dari sampean. ohiya [klik di sini](https://rpubs.com/albani88/Regresi) untuk materi sebelumnya. kita akan mencoba membuat contoh data set untuk membuat model Regresi.
 
+ohh iya literatur lain bisa di cek [di sini](https://rpubs.com/rizkia/sta1382-analisis-regresi)
+
 - Regresi Linear
 
 ```{r}
