@@ -1,0 +1,178 @@
+---
+title: "Data Transformation"
+author: "Albani"
+date: "2024-03-31"
+output: 
+  html_document:
+    theme : simplex
+    code_folding : show
+    code_download : yes
+    toc : yes
+    toc_float:
+      collapsed: true
+---
+
+# Pendahuluan
+
+Di hampir semua analisis statistik dan pembelajaran mesin, perlu dilakukan beberapa transformasi data (yaitu transformasi data, penskalaan, pemusatan, standardisasi, dan normalisasi) pada data mentah (namun rapi dan bersih!) sebelum dapat digunakan untuk pemodelan.
+
+## Pengertian  Transformasi
+
+Transformasi data sering kali merupakan syarat untuk melanjutkan analisis statistik. Berikut adalah situasi di mana kita mungkin memerlukan transformasi:
+
+1. Kita mungkin perlu mengubah skala suatu variabel atau menstandardisasi nilai suatu variabel untuk pemahaman yang lebih baik.
+
+2. Kita mungkin perlu mengubah hubungan non-linier yang kompleks menjadi hubungan linier. Transformasi membantu kita mengubah hubungan non-linier menjadi hubungan linier.
+
+3. Dalam inferensi statistik, distribusi simetris (normal) lebih disukai daripada distribusi miring. Selain itu, beberapa teknik analisis statistik (yaitu uji parametrik, regresi linier, dll) memerlukan distribusi variabel yang normal dan homogenitas varians. Jadi, setiap kali kita mempunyai distribusi yang miring dan/atau variansi yang heterogen, kita dapat menggunakan transformasi yang dapat mengurangi kecondongan dan/atau heterogenitas varians.
+
+## Macam-macam Transformasi
+
+Macam macam transformasi ini di gunakan sesuai kebutuhan data set kita, karna beda kebutuhan beda juga jenis transdformasi yang umum di gunakan. Dalam konten ini akan hanya ada 3 contoh study case saja karena memang menurut saya jenis transformasi yang sering di gunakan adalah 3 itu saja.
+
+- **Tansformasi Logaritmik**
+
+Menggunakan logaritma dari nilai-nilai data. Ini berguna untuk menangani data dengan skala yang sangat luas atau data yang memiliki distribusi miring ke satu arah. 
+
+- **Differencing**
+
+Mengambil perbedaan antara nilai-nilai data pada waktu yang berbeda untuk menghilangkan tren atau musiman dalam data temporal. nah ini biasa di pakai untuk memenuhi asumsi dalam pembuatan model `time series`
+
+- **Transformasi Kuadrat**
+
+Menggunakan nilai kuadrat dari data. Transformasi ini dapat membantu dalam mengatasi masalah heteroskedastisitas, di mana varians data tidak konstan. 
+
+    Heteroskedastisitas adalah istilah dalam statistika yang digunakan untuk menggambarkan ketidakseragaman varians dari residual (kesalahan) dalam sebuah model regresi atau analisis data.
+    
+Simpelnya heterogen dah itu.. 
+
+- **Transformasi Akar Kuadrat**
+
+Menggunakan akar kuadrat dari nilai-nilai data. Ini sering digunakan untuk mengurangi kebuntuan dalam distribusi data. 
+
+    kebuntuan yang di maksud adalahnilai-nilai dalam dataset cenderung terkumpul di salah satu sisi distribusi, sehingga distribusi data menjadi miring atau tidak simetris.  
+
+- **Transformasi Box-Cox**
+
+ Transformasi statistik yang dapat mengubah distribusi data menjadi lebih normal. Parameter lambda digunakan untuk menyesuaikan transformasi berdasarkan data. Box-Cox adalah alat yang berguna dalam analisis statistik untuk menormalkan distribusi data dan meningkatkan kecocokan model regresi atau analisis lainnya. Namun, penting untuk diingat bahwa transformasi ini tidak selalu berhasil untuk semua jenis data, dan terkadang beberapa variasi transformasi atau pendekatan alternatif mungkin diperlukan. 
+
+- **Standarisasi (Z-score Transformation)**
+
+Mengubah nilai-nilai data sehingga memiliki rata-rata nol dan simpangan baku satu. Ini berguna dalam membandingkan variabel yang diukur dalam unit yang berbeda atau memiliki skala yang besar. 
+
+- **Normalisasi (Min-Max Scaling)**
+
+Mengubah nilai-nilai data ke dalam rentang tertentu, seperti [0, 1] atau [-1, 1]. Ini memungkinkan data memiliki skala yang seragam. 
+
+- **Pengurutan Rangking (Rank Transformation)**
+
+Mengganti setiap nilai dalam dataset dengan peringkat atau rangking relatifnya dalam dataset. Ini berguna dalam mengatasi asimetri atau anomali dalam data. 
+
+- **Winsorization**
+
+Mengganti nilai-nilai outlier dengan nilai-nilai tertentu yang berada di kuartil tertentu dari distribusi data. Ini membantu mengurangi dampak outlier terhadap analisis statistik. 
+
+# Study case
+
+Study case ini isinya beberapa contoh yang sering kita dapatkan ketika dalam membuat model.
+
+## Persiapan
+
+### PACKAGE
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(readr)
+# library for data set
+library(datasets)
+library(boot)
+library(agricolae)
+library(BSDA)
+```
+
+### Data set
+
+Mencari contoh data set dalam statistika bukanlah hal yang sulit, dengan R kita bisa mendapatkan ribuan data set. kita bisa menginstall package (datasets, ggplot2, lubridate, dplyr). list kumpulan datanya bisa mengguanakn sintaks berikut :
+
+```{r}
+# Melihat data dari Package yang sudah terinstall
+data()
+#melihat list seluruh data yang di sediakan R
+data(package = .packages(all.available = TRUE))
+```
+
+## Let's Go
+
+Mari menggunakan contoh contoh untuk transformasi data, perlu di ingat konten ini tidak akan membahas semuanya, namun akan membahas yang umum dan akan sering kita pakai dalam kehidupan akhirat, eh maksudnya sehari hari.
+
+### Transformasi data dengan logaritma
+
+`y = log(x)`
+
+Begitulah fungsinya, namun perlu diingat, Yang perlu diperhatikan adalah bahwa transformasi logaritma hanya berlaku untuk nilai-nilai yang positif, karena logaritma dari nol atau nilai negatif tidak terdefinisi dalam matematika. Sebagai alternatif, Anda bisa menggunakan transformasi `Box-Cox` untuk menangani data yang berisi nilai nol atau negatif.
+
+Transformasi logaritma kita gunakan ketika data kita berdistribusi berada di 1 arah, contohnya kiri atau kanan, contohnya sperti di bawah ini.
+
+
+```{r}
+head(esoph,6)
+contohxx2 = esoph %>% 
+  select(ncases, ncontrols)
+# summary sebelum di tranformasi
+summary(contohxx2)
+```
+
+```{r}
+plot(contohxx2, pch =16, col = "darkgreen",  xlab ="ncases", ylab =  "ncontrols", main = "Sebelum di transformasi")
+text(x=15, y=50, labels = "**hanya untuk contoh saja yak...**", pos =2,5, col = "red", cex = 0.9)
+```
+
+kelihatan kan plot di atas cenderung ke kiri, nah dengan transformation log, kita bisa membuatnya menjadi menyebar ketengah. Mari kita coba untuk lakukan transformasi.
+
+```{r}
+log_transform = log(contohxx2, base =10)
+plot(log_transform, pch =16, col = "darkred", main = "setelah di transformasi")
+```
+
+```{r}
+# Summary setelah di transformasi
+summary(log_transform)
+```
+Karena data yang di gunakan ada angka 0, sebenarnya Transformasi log tidak bisa di gunakan. jadi kita harus menggunakan `transformasi Box-Cox`.
+
+### Transformasi data dengan Diferencing
+
+Transformasi ini banyak di gunakan untuk data yang akan digunakan untuk membuat model dalam analisis `time series`, transformasi ini di jalankan ketika data set yang kita punya tidak stasioner. penjelasan tentang stasioner akan dibahas di konten yang lain.
+
+```{r}
+summary(ldeaths)
+plot(ldeaths, main = "Contoh sebelum di transformasi")
+```
+
+karena di atas hanya contoh, bayangkan saja data di atas tidak stasioner. selanjutnya.
+```{r}
+#data sebelum di Transformasi
+head(ldeaths)
+```
+```{r}
+diff_transformation = diff(ldeaths)
+# data setelah di transformai
+head(diff_transformation)
+```
+```{r}
+plot(diff_transformation, main = "plot setelah di transformasi")
+```
+
+nah begitulah caranya transformasi data di R, masalah penjelasan stasioiner akan sy buatkan dalam minggu ini.
+
+### Transformasi data dengan Kuadrat
+
+
+### Transformasi data dengan Boxcox
+
+
+### Transformasi data dengan Winsorization
+
+
+
