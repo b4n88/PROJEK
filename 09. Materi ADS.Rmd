@@ -16,10 +16,69 @@ output:
 
 # Pendahuluan
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+****
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+|          |                     |
+| :---     | :---                |
+| **Kontak**   |                    |
+| Name     | Albani              |
+| E-mail   | al.bani12300@gmail.com   |
+| LinkedIn | [Profil LinkedIn Al Bani](https://www.linkedin.com/in/al-bani-532b06294/) |
+| Rpubs    |  [Rpubs](https://rpubs.com/albani88) |
+| IG       |  [Instagram](https://www.instagram.com/b4n.88/) |
 
+****
+
+## WHAT ADS IS ??
+
+Analisis data statistik adalah proses menyelidiki, menganalisis, dan menafsirkan data menggunakan berbagai teknik statistik untuk mendapatkan pemahaman yang lebih dalam tentang fenomena yang diamati. Tujuan utamanya adalah untuk mengidentifikasi pola, hubungan, dan tren yang tersembunyi dalam data, serta untuk membuat inferensi atau prediksi yang dapat digunakan untuk mengambil keputusan yang terinformasi. 
+
+
+Apa yang akan di pelajari pada BAB ini ??
+
+1. Menyusun angka
+2. Ringkasan data
+3. Penggunaan ringkasan data
+4. Transformasi data
+
+Pertemuan selanjutnya :
+
+5. Sample Random dan Distribusi teoritis
+6. Uji hipotesis
+7. Regresi
+8. Analisis data kategorik
+9. Analsis Elementer dan analisis variansi dua arah
+
+## ADS PREPARATION
+
+Apa yang harus di persiapkan untuk memulai ADS ?
+
+### Data dan Pengumpulannya
+
+*Sudah ada di materi metode pengumpulan data, apakah masih ingat ??*
+jika masih ingat mari diskusi..
+
+**1. Kapan kita menggunakan data primer dan data sekunder ??**
+
+**2. Kenapa harus kita harus melakukan sampling ??**
+
+Oh iya saya sudah menulis sedikit sekali tentang data, insyaallah akan di banyakin bisa cek dengan cara klik [Disini](https://rpubs.com/albani88).
+
+### ADS TOOLS
+
+R dan aplikasi lainnya memang sangat berguna, namun jangan pernah 
+
+1. EXCEL
+
+![Excel](https://qph.cf2.quoracdn.net/main-qimg-5f3cdaf30fecc95bcb3af6c0055dac6d-lq)
+
+2. R & Py
+
+![R](https://dibimbing-cdn.sgp1.cdn.digitaloceanspaces.com/1664769291087-1_d-K19RVdGTl5_fqMRcFXjw.jpeg.webp)
+
+3. Lainnya
+
+Buanyak bangett cari aja di [Google](www.google.com)
 
 # ADS
 
