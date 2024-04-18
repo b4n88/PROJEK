@@ -82,13 +82,25 @@ Buanyak bangett cari aja di [Google](www.google.com)
 
 # ADS
 
-You can also embed plots, for example:
+Sesi ini mengenai tentang data Cleaning and Data Preparation
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+![Chank1](https://github.com/b4n88/PROJEK-Statistikadasar/blob/main/unnamed-chunk-1-1(1).png?raw=true)
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+# Modul 1
+
+
+
+# Modul 2
+
+
+
+# Modul 3
+
+
+
+# Modul 4
+
+
 
 # case
 
