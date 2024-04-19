@@ -29,6 +29,12 @@ output:
 
 ****
 
+Sebelum mulai ada beberapa hal yang ingin saya sampaikan :
+
+- Ubah ADS halaman 1.3, 1.5, 1.6 dan 1.9 (tolong di coret)
+- Saya hanya mahasiswa biasa
+- Malam ini adalah tentang diskusi bersama bukan tentang siapa yang lebih jago.
+
 ## WHAT ADS IS ??
 
 Analisis data statistik adalah proses menyelidiki, menganalisis, dan menafsirkan data menggunakan berbagai teknik statistik untuk mendapatkan pemahaman yang lebih dalam tentang fenomena yang diamati. Tujuan utamanya adalah untuk mengidentifikasi pola, hubungan, dan tren yang tersembunyi dalam data, serta untuk membuat inferensi atau prediksi yang dapat digunakan untuk mengambil keputusan yang terinformasi. 
@@ -66,7 +72,7 @@ Oh iya saya sudah menulis sedikit sekali tentang data, insyaallah akan di banyak
 
 ### ADS TOOLS
 
-R dan aplikasi lainnya memang sangat berguna, namun jangan pernah 
+    R dan aplikasi lainnya memang sangat penting, namun jangan pernah meninggalkan Excel ~ Rangga Pratama head of Starcore analytics
 
 1. EXCEL
 
@@ -86,7 +92,15 @@ Sesi ini mengenai tentang data Cleaning and Data Preparation
 
 ![Chank1](https://github.com/b4n88/PROJEK-Statistikadasar/blob/main/unnamed-chunk-1-1(1).png?raw=true)
 
-# Modul 1
+      Perlu di ingat, eksplorasi data bukan sekedar tentang berapa rata-ratanya, berapa nilai tertinggi dan terendahnya !! tapi lebih dari itu yakni berkenalan lebih dalam tentang data.
+
+# Modul 1 
+
+## Kegiatan 1
+
+
+## Kegiatan 2
+
 
 
 
@@ -106,5 +120,3 @@ Sesi ini mengenai tentang data Cleaning and Data Preparation
 
 
 # KESIMPULAN
-
-
