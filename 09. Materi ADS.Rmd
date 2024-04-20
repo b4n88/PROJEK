@@ -31,7 +31,7 @@ output:
 
 Sebelum mulai ada beberapa hal yang ingin saya sampaikan :
 
-- Ubah ADS halaman 1.3, 1.5, 1.6 dan 1.9 (tolong di coret)
+- Ubah ADS halaman 1.3, 1.5, 1.6, 1.9, 120, 121  (tolong di coret)
 - Saya hanya mahasiswa biasa
 - Malam ini adalah tentang diskusi bersama bukan tentang siapa yang lebih jago.
 
@@ -68,6 +68,8 @@ jika masih ingat mari diskusi..
 
 **2. Kenapa harus kita harus melakukan sampling ??**
 
+**3. Apakah ada kumpulan data set untuk praktik (ada di materi modul 3)**
+
 Oh iya saya sudah menulis sedikit sekali tentang data, insyaallah akan di banyakin bisa cek dengan cara klik [Disini](https://rpubs.com/albani88).
 
 ### ADS TOOLS
@@ -96,27 +98,186 @@ Sesi ini mengenai tentang data Cleaning and Data Preparation
 
 # Modul 1 
 
-## Kegiatan 1
+*Membahas tentang Menyusun angka*.
 
+Menyusunnya dalam bentuk angkatan (Batch) dan diagram batang dan daun.
 
-## Kegiatan 2
+Harapan dari modul kegiatan 1 adalah : **mampu mengambil angka yang menjadi perhatian, menentukan unit unit analisis menyederhanakan dan mengurutkan** 
 
+Harapan dari modul kegiatan 2 adalah : **Menyajikan data serta mengambil sari informasi dari angka tersebut**
 
+saya sudah menyiapkan mini projek :
 
+Perhatikan gambar berikut :
+![Data set](https://github.com/b4n88/PROJEK-Statistikadasar/blob/main/Data%20mini%20projek.jpg?raw=true)
+
+Mini projek :
+
+- Jadikan dalam bentuk tabular (Bebas menggunakan aplikasi apapun)
+- Ambil sari Informasi (Buatlah dalam bentuk table)
+- Kerjakan dalam 10 Menit
+- kumpulkan filenya dengan cara [Klik di sini](https://forms.gle/TLUf9mADvtKis3L98)
 
 # Modul 2
 
+*Membahas tentang Ringkasan Numerik*.
+
+Ringkasan numerik di bedakan menjadi 2 jenis :
+
+a. Pusat data, yang terdiri dari:
+
+- Mean
+
+rata-rata = $\frac{\sum{x_i}}{n}$
+
+Nilai pusat data, biasanya di gunakan seperti :
+
+- Rata-rata uang yang di hasilkan dalam 1 bulan adalah `271 Triliun`
+- Rata-rata IPK mhs Statistik adalah 1.5
+
+Perlu di ingat, rata rata ini hanya bisa di gunakan untuk data numerik atau kuantitatif. data kualitatif tidak bisa di hitung rata-ratanya. gak percaya? mari kita coba :
+
+Jika dalam diskusi kali ini terdapat 15 orang `L` dan 9 orang `P` aturan matematika adalah kualitatif tidak bisa di lakukan operasi aritmatika. 
+
+sehingga kalau kita paksakan kita rubah dari `L = 1` dan `P = 2` maka kita bisa hitung :
+
+rata-rata = $\frac{\sum{(15*1)+(9*2)}}{15+9}= \frac{{33}}{24}=1.375$
+
+`1.375` ini apa? sedangkan hanya ada 2 kategori `L` sm `P`, kan tidak mungkin setengah dewa.
+
+- Median
+
+Median atau nilai tengah. cara menghitungnya :
+
+- Urutkan data: 3, 4, 5, 6, 7, 8, 9, 12.
+- Karena jumlah data (n) adalah genap (8), median adalah rata-rata dari dua nilai tengah, yaitu $\frac{{(6 + 7)}} {2} = 6.5$.
+
+Kapan di gunakan?
+
+Mencari harga terbaik : contoh kita mau membeli rumah dengan harga yang fantastis karena lengkap dengan perabotan. Jika terdapat beberapa properti mewah dengan harga yang jauh lebih tinggi daripada properti lainnya, median harga rumah mungkin memberikan gambaran yang lebih baik tentang harga "tengah" di daerah tersebut daripada rata-rata harga rumah.
+
+- Trirata
+
+Langkah-langkahnya:
+
+- Urutkan data: 2,5,7,10,13,17,18,20.
+
+- Tentukan posisi kuartil:
+  
+  n=jumlah data=8
+  
+  Q1=posisi data `25% * n`
+  Q2=posisi data `50% * n`
+  Q3=posisi data `75% * n`
+
+- Tentukan nilai kuartil:
+
+- Q1=data ke 2=5
+- Q2=data ke 4=10
+- Q3=data ke 6=17
+
+nilai Q1, Q2, dan Q3 memberikan wawasan yang berharga tentang sebaran, kecenderungan, dan karakteristik data, yang dapat membantu dalam pengambilan keputusan yang lebih baik dan pemahaman yang lebih baik tentang fenomena yang diamati.
+
+- Modus
+
+Modusadalah nilai atau nilai-nilai yang paling sering muncul dalam sebuah distribusi data. Mengetahui modus membantu kita memahami nilai yang paling umum atau dominan dalam data tersebut.
+
+rata-rata digunakan untuk memberikan gambaran tentang nilai pusat dari distribusi data, sementara modus digunakan untuk mengidentifikasi nilai yang paling umum atau dominan dalam data. 
+
+Contoh kasus untuk modus :
+
+sebagai market research kita ingin mengetahui produk mana yang paling laku. bagaimana caranya? otomatis item yang paling banyak di beli bukan? ini linear dengan pengertian Modus
+
+b. Sebaran data, yang terdiri dari :
+
+- Range
+
+Interfal data, dalam perusahaan biasa di tanya ini estimasi selesai di kerjakannya berapa lama? kita bisa menjawab di interfal 2-5 jam pak.
+
+$\int_{1}^{3}x$
+
+- Variansi & Standar Deviasi
+
+Variance          : Nilai variance memberikan gambaran tentang seberapa besar variasi total dalam data. Namun, karena diukur dalam satuan kuadrat, nilai variance mungkin sulit diinterpretasikan secara intuitif. 
+
+Standar Deviasi   : Standar deviasi memberikan ukuran dispersi yang lebih intuitif, karena diukur dalam satuan yang sama dengan data aslinya. Ini memberikan informasi tentang sejauh mana nilai-nilai individual bervariasi dari rata-rata dalam satuan yang dapat dimengerti. 
+
+- Koefisien Varainsi
+
+Ingat kembali salah satu rasio yang biasa digunakan dalam statistika yang berguna untuk melihat sebaran data dari rata-rata hitungnya. Rasio tersebut disebut sebagai koefisien variasi. 
+
+Formulanya adalah :
+
+$kv=\frac{{sd}}{mean}*100$
+
+Semakin kecil rasio koefisien variasi, maka kita bisa simpulkan bahwa data semakin homogen. Sementara sebaliknya, semakin besar nilai rasionya maka data akan semakin heterogen. 
 
 
 # Modul 3
 
+*Membahas tentang Penggunaan ringkasan numerik*
+
+Contoh Case :
+
+```{r}
+library(readr)
+library(tidyverse)
+library(dplyr)
+library(vtable)
+library(pastecs)
+```
+
+Contoh kasus :
+
+    Kita punya client bertanya : "Mas saya punya data qty penjualan, mau cek mana ya yang lebih fluktuatif?"
+
+```{r}
+#Membuat data set
+set.seed(123)
+ADS_dataset1 = rnorm(25, mean = 1000, sd = 100)
+ADS_dataset2 = rnorm(25, mean = 150, sd = 100)
+
+ADS = data.frame(ADS_dataset1, ADS_dataset2)
+sumtable(ADS)
+```
+
+Fluktuatif artinya data lebih menyebar (tidak homogen). semakin fluktuatif artinya datanya tidak stabil.
+
+dengan bantuan KF kita bisa melihat data mana yang tidak stabil.
+
+```{r}
+stat.desc(ADS)
+```
+
+Terlihat data di atas `dataset1` lebih besar dari pada `dataset2` sehingga dapat kita simpulkan bahwa `data set1` lebih `fluktuatif`. Artinya `dataset2` lebih `homogen` atau `stabil`.
+
+*Dengan menggunakan R kita bisa menghitung data dengan gampang* pengguna Py minggir dulu.
+
+# TAMBAHAN
+
+## Membuat grafik as tableau
+
+membuat Grafik mudah di R seperti proplayer degan menggunan package berikut.
+
+```{r}
+library(esquisse)
+#esquisser(data)
+```
+
+
+## Data set dalam R
+
+Untuk latihan data kumpulan data set yang di sediakan R bisa di cek dengan package berikut.
+
+```{r}
+library(datasets)
+data()
+```
 
 
 # Modul 4
 
 
 
-# case
 
 
-# KESIMPULAN
