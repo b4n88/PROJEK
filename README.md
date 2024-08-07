@@ -3,4 +3,3 @@ Oh iya Projek ini menggunakan full R Program yak..
 
 Jika ada masukan bisa email ke albani.baga@gmail.com
 
-selamat menikmati
